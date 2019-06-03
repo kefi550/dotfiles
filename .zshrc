@@ -36,7 +36,7 @@ compinit -u
 ##
 #
 #export PROMPT="%{$fg_bold[blue]%} %m:%~ $PROMPT"
-export PROMPT=$'%{\e[30;48;5;082m%}%{\e[38;5;001m%}[%n@%m]%{\e[0m%} %~ $ '
+export PROMPT=$'%{\e[30;48;5;082m%}%{\e[38;5;001m%}[%n@%m]%{\e[0m%} %~ %% '
 #export PROMPT="%{$fg_bold[gray]%} %m:%{$fg_bold[cyan]%}~ $ "
 export RPROMPT="${HOST} %*"
 #

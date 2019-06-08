@@ -34,6 +34,7 @@ compinit -u
 #autoload -Uz colors
 #colors
 ##
+
 #
 #export PROMPT="%{$fg_bold[blue]%} %m:%~ $PROMPT"
 export PROMPT=$'%{\e[30;48;5;082m%}%{\e[38;5;001m%}[%n@%m]%{\e[0m%} %~ %% '
@@ -49,8 +50,14 @@ setopt no_beep
 export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 export VAGRANT_WSL_WINDOWS_ACCESS_USER_HOME_PATH=/home/kefi/
 
-
 ## pure setting
 #local username=''
 #DEFAULT_USERNAME='getwild'
 #[ $USER != $DEFAULT_USERNAME ] && local username='%n@%m '
+
+export XDG_CONFIG_HOME=~/.config
+export XDG_CACHE_HOME=~/.cache
+
+
+alias vim="/usr/bin/nvim"
+alias ovim="/usr/bin/vim"

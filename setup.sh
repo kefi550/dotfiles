@@ -1,13 +1,7 @@
 #!/bin/bash
 
-DOTFILES=(
-	.zshrc 
-	.zprofile 
-	.vimrc
-	.gitconfig
-	)
-
-for file in ${DOTFILES[@]}
-do
-	ln -snfv ~/dotfiles/$file ~/
-done
+ln -snfv ~/dotfiles/_zshrc ~/.zshrc
+ln -snfv ~/dotfiles/_zprofile ~/.zprofile
+ln -snfv ~/dotfiles/_vimrc ~/.vimrc
+ln -snfv ~/dotfiles/_gitconfig ~/.gitconfig
+ln -snfv ~/dotfiles/_config ~/.config

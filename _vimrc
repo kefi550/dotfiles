@@ -42,4 +42,5 @@ filetype plugin indent on
 " this will conveniently prompt you to install them.
 " NeoBundleCheck
 
-
+set ambiwidth=double
+set fileencodings=utf-8,cp932

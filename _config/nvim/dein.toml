@@ -25,7 +25,9 @@ hook_post_update = '''
 
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
-hook_add = 'let g:deoplete#enable_at_startup = 1'
+hook_add = '''
+  source ~/.config/nvim/plugins/deoplete.vim
+'''
 
 [[plugins]]
 repo = 'Shougo/neosnippet'
@@ -38,6 +40,9 @@ repo = 'cespare/vim-toml'
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
+hook_post_update = '''
+  source ~/.config/nvim/plugins/lightline.vim
+'''
 
 [[plugins]]
 repo = 'Shougo/unite.vim'

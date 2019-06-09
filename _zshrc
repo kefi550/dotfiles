@@ -1,11 +1,17 @@
+autoload -U compinit
+compinit -u
+autoload -Uz colors
+colors
+
 source ~/.zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-#zplug "mafredri/zsh-async"
+zplug "mafredri/zsh-async"
+
 ## history関係
 #zplug "zsh-users/zsh-history-substring-search"
 
 # テーマ
-zplug "yous/lime"
+#zplug "yous/lime"
 
 # 構文のハイライト(https://github.com/zsh-users/zsh-syntax-highlighting)
 zplug "zsh-users/zsh-syntax-highlighting"
@@ -27,37 +33,105 @@ if ! zplug check --verbose; then
 fi
 ## Then, source plugins and add commands to $PATH
 zplug load
-##
-##
-autoload -U compinit
-compinit -u
-#autoload -Uz colors
-#colors
-##
 
-#
-#export PROMPT="%{$fg_bold[blue]%} %m:%~ $PROMPT"
-export PROMPT=$'%{\e[30;48;5;082m%}%{\e[38;5;001m%}[%n@%m]%{\e[0m%} %~ %% '
-#export PROMPT="%{$fg_bold[gray]%} %m:%{$fg_bold[cyan]%}~ $ "
-export RPROMPT="${HOST} %*"
-#
+###############################################################################
+# prompt
+###############################################################################
+
+autoload -Uz promptinit
+promptinit
+#prompt adam1
+autoload -Uz vcs_info
+precmd() {
+  vcs_info
+}
+setopt prompt_subst
+zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
+zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
+
+PROMPT='%D{%Y/%m/%d %H:%M:%S} %{$fg[magenta]%}(%~)%{$reset_color%} ${vcs_info_msg_0_}
+%{$fg[cyan]%}%n@%m%{$reset_color%} %# '
+#%{$fg[cyan]%}%n@%m%{$reset_color%} %# '
+#PROMPT='%D{%Y/%m/%d %H:%M:%S} ${fg[green]}(%~)${reset_color} ${fg[magenta]}${vcs_info_msg_0_}${reset_color}
+#%n@%m %# '
+
+# コマンド実行時に時刻を更新する
+re-prompt() {
+    zle .reset-prompt
+    zle .accept-line
+}
+
+zle -N accept-line re-prompt
+
+###############################################################################
+
+setopt histignorealldups sharehistory
+# Avoid background processes to not bother Windows
+unsetopt BG_NICE
+
+# Use emacs keybindings even if our EDITOR is set to vi
+bindkey -v
+
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=1000
+
+# コマンド実行時に時刻を更新する
+re-prompt() {
+    zle .reset-prompt
+    zle .accept-line
+}
+
+zle -N accept-line re-prompt
+
+###############################################################################
+
+setopt histignorealldups sharehistory
+# Avoid background processes to not bother Windows
+unsetopt BG_NICE
+
+# Use emacs keybindings even if our EDITOR is set to vi
+bindkey -v
+
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history
+
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' menu select=2
+eval "$(dircolors -b)"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+zstyle ':completion:*' menu select=long
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' use-compctl false
+zstyle ':completion:*' verbose true
+
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+
 setopt print_eight_bit
 setopt nolistbeep
 setopt no_beep
-#
-##export PATH="$(echo "$PATH" | sed -r -e 's;:/mnt/[^:]+;;g')"
-##export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"
-export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
-export VAGRANT_WSL_WINDOWS_ACCESS_USER_HOME_PATH=/home/kefi/
 
-## pure setting
-#local username=''
-#DEFAULT_USERNAME='getwild'
-#[ $USER != $DEFAULT_USERNAME ] && local username='%n@%m '
+# vagrant
+export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
+
+#export PATH="~/.pyenv/bin:$PATH"
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
+
+# export GOPATH=$HOME/go
+# export PATH=$PATH:/usr/lib/go-1.10/bin
+# export PATH=$PATH:$GOPATH/bin
 
 export XDG_CONFIG_HOME=~/.config
 export XDG_CACHE_HOME=~/.cache
-
 
 alias vim="/usr/bin/nvim"
 alias ovim="/usr/bin/vim"

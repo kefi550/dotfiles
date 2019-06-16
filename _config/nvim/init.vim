@@ -1,3 +1,5 @@
+let g:python3_host_prog = '/usr/bin/python3'
+
 " 行数
 set number
 

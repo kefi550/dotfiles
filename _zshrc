@@ -138,16 +138,23 @@ setopt no_beep
 # vagrant
 export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 
-#export PATH="~/.pyenv/bin:$PATH"
-#eval "$(pyenv init -)"
-#eval "$(pyenv virtualenv-init -)"
 
+## golang
 # export GOPATH=$HOME/go
 # export PATH=$PATH:/usr/lib/go-1.10/bin
 # export PATH=$PATH:$GOPATH/bin
 
+## pyenv
+PYENV_ROOT="$HOME/.pyenv"
+PATH="$PYENV_ROOT/shims:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+#eval "$(pyenv virtualenv-init -)"
+
 export XDG_CONFIG_HOME=~/.config
 export XDG_CACHE_HOME=~/.cache
 
+## alias
 alias vim="/usr/bin/nvim"
 alias ovim="/usr/bin/vim"

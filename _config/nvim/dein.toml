@@ -27,6 +27,8 @@ hook_post_update = '''
 repo = 'Shougo/deoplete.nvim'
 hook_add = '''
   source ~/.config/nvim/plugins/deoplete.vim
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#auto_completion_start_length = 1
 '''
 
 [[plugins]]
@@ -39,19 +41,62 @@ repo = 'Shougo/neosnippet-snippets'
 repo = 'cespare/vim-toml'
 
 [[plugins]]
+repo = 'Shougo/unite.vim'
+
+#ディレクトリ表示
+[[plugins]]
+repo = 'Shougo/vimfiler'
+hook_add = '''
+  " Use vimfiler instead of default filer.
+  let g:vimfiler_as_default_explorer = 1
+  " Open filer
+  noremap <silent> :tree :VimFiler -split -simple -winwidth=30 -no-quit
+  nnoremap <silent> <Leader>fi :<C-u>VimFilerBufferDir -split -simple -winwidth=24 -no-quit<ENTER>
+  nnoremap <silent> <Leader>fi :<C-u>VimFiler -split -simple -winwidth=24 -no-quit<ENTER>
+  " noremap <C-X><C-T> :VimFiler -split -simple -winwidth=30 -no-quit<ENTER>
+  " Don't let <CR> enter the directory but let it open the directory
+  autocmd FileType vimfiler nmap <buffer> <CR> <Plug>(vimfiler_expand_or_edit)
+  " Automatically open vimfiler on start
+  " autocmd VimEnter * VimFiler -split -simple -winwidth=29 -no-quit
+'''
+
+##ディレクトリ表示
+#[[plugins]]
+#repo = 'scrooloose/nerdtree'
+
+# カッコ補完
+[[plugins]]
+repo = 'Townk/vim-autoclose'
+
+# syntax check
+[[plugins]]
+repo =  'scrooloose/syntastic'
+
+[[plugins]]
+repo = 'Shougo/vimshell'
+
+# コード補完
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+on_ft = ['python']
+
+[[plugins]]
+repo = 'kana/vim-operator-user'
+
+# ヤンクしたとこが一瞬ハイライト
+[[plugins]]
+repo = 'haya14busa/vim-operator-flashy'
+hook_source = '''
+  map y <Plug>(operator-flashy)
+  nmap Y <Plug>(operator-flashy)$
+'''
+
+[[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_post_update = '''
   source ~/.config/nvim/plugins/lightline.vim
 '''
 
 [[plugins]]
-repo = 'Shougo/unite.vim'
-
-[[plugins]]
 repo = 'ujihisa/unite-colorscheme'
 
-[[plugins]]
-repo = 'Shougo/vimfiler'
-
-[[plugins]]
-repo = 'Shougo/vimshell'

@@ -96,4 +96,8 @@ inoremap <silent> <C-j> j
 inoremap <silent> kk <ESC>
 inoremap <silent> <C-k> k
 
-let g:python3_host_prog = '/home/kefi/.pyenv/shims/python'
+if has("mac")
+  let g:python3_host_prog = '/usr/bin/python3'
+elseif has("unix")
+  let g:python3_host_prog = '/home/kefi/.pyenv/shims/python'
+endif

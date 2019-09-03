@@ -172,5 +172,8 @@ export XDG_CACHE_HOME=~/.cache
 export DISPLAY=localhost:0.0
 
 ## alias
+alias ll="ls -l"
+alias sudo="sudo "
+
 alias vim="/usr/bin/nvim"
 alias ovim="/usr/bin/vim"

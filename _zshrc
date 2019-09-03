@@ -23,6 +23,9 @@ zplug "zsh-users/zsh-completions"
 zplug "chrissicool/zsh-256color"
 zplug "b4b4r07/enhancd"
 
+zplug "superbrothers/zsh-kubectl-prompt"
+source $ZPLUG_HOME/repos/superbrothers/zsh-kubectl-prompt/kubectl.zsh
+
 #zplug "sindresorhus/pure"
 
 # Install plugins if there are plugins that have not been installed
@@ -58,11 +61,18 @@ function zle-keymap-select {
 zle -N zle-keymap-select
 bindkey -M viins 'jj' vi-cmd-mode
 
-PROMPT='${VIMODE} %D{%Y/%m/%d %H:%M:%S} %{$fg[magenta]%}(%~)%{$reset_color%} ${vcs_info_msg_0_}
+KUBE_COLOR="red"
+case ${ZSH_KUBECTL_PROMPT} in
+  poc*) KUBE_COLOR="cyan" ;;
+  stg*) KUBE_COLOR="green" ;;
+  *nightly*) KUBE_COLOR="yellow" ;;
+  *prd*) KUBE_COLOR="red" ;;
+esac
+KUBE_PROMPT="%{$fg[${KUBE_COLOR}]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}"
+if [ -z "$ZSH_KUBECTL_PROMPT" ]; then; KUBE_PROMPT=""; fi
+
+PROMPT='${VIMODE} %D{%Y/%m/%d %H:%M:%S} %{$fg[magenta]%}(%~)%{$reset_color%} ${vcs_info_msg_0_} ${KUBE_PROMPT}
 %{$fg[cyan]%}%n@%m%{$reset_color%} %# '
-#%{$fg[cyan]%}%n@%m%{$reset_color%} %# '
-#PROMPT='%D{%Y/%m/%d %H:%M:%S} ${fg[green]}(%~)${reset_color} ${fg[magenta]}${vcs_info_msg_0_}${reset_color}
-#%n@%m %# '
 
 # コマンド実行時に時刻を更新する
 re-prompt() {

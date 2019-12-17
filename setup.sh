@@ -1,8 +1,10 @@
 #!/bin/bash
 
-ln -snfv ~/dotfiles/_zshrc ~/.zshrc
-ln -snfv ~/dotfiles/zfiles/.z* ~/.zfiles
-ln -snfv ~/dotfiles/_zprofile ~/.zprofile
-ln -snfv ~/dotfiles/_vimrc ~/.vimrc
-#ln -snfv ~/dotfiles/_gitconfig ~/.gitconfig
-ln -snfv ~/dotfiles/_config ~/.config
+DOTFILE_DIR=$(pwd)
+
+ln -snfv $DOTFILE_DIR/_zshrc ~/.zshrc
+ln -snfv $DOTFILE_DIR/zfiles/.z* ~/.zfiles
+ln -snfv $DOTFILE_DIR/_zprofile ~/.zprofile
+ln -snfv $DOTFILE_DIR/_vimrc ~/.vimrc
+#ln -snfv $DOTFILE_DIR./_gitconfig ~/.gitconfig
+ln -snfv $DOTFILE_DIR/_config ~/.config

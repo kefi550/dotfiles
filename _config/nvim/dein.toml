@@ -3,7 +3,7 @@ repo = 'Shougo/dein.vim'
 
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
-make = 'make'
+build = 'make'
 #hook_post_update = '''
 #  if dein#util#_is_windows()
 #    let cmd = 'tools\\update-dll-mingw'
@@ -75,10 +75,6 @@ repo =  'scrooloose/syntastic'
 [[plugins]]
 repo = 'Shougo/vimshell'
 
-# コード補完
-[[plugins]]
-repo = 'davidhalter/jedi-vim'
-on_ft = ['python']
 
 [[plugins]]
 repo = 'kana/vim-operator-user'
@@ -100,3 +96,19 @@ hook_post_update = '''
 [[plugins]]
 repo = 'ujihisa/unite-colorscheme'
 
+##############################################
+# コード補完
+#[[plugins]]
+#repo = 'davidhalter/jedi-vim'
+#on_ft = ['python']
+
+[[plugins]]
+repo = 'autozimu/LanguageClient-neovim'
+rev = 'next'
+build = 'bash install.sh'
+hook_add = '''
+  let g:LanguageClient_serverCommands = {
+        \ 'python': ['pyls'],
+  \ }
+'''
+##############################################

@@ -1,99 +1,15 @@
-export ZPLUG_HOME=~/.zplug
-autoload -U compinit
-compinit -u
-autoload -Uz colors
-colors
+export ZFILES=~/.zfiles
+#export ZPLUG_HOME=~/.zplug
 
-source $ZPLUG_HOME/init.zsh
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-zplug "mafredri/zsh-async"
+## plugin
+#source $ZFILES/.zplugin.zplug
+#source $ZFILES/.zplugin_lazy
+source $ZFILES/.zplugin
 
-## history関係
-#zplug "zsh-users/zsh-history-substring-search"
+## prompt
+source $ZFILES/.zprompt
 
-# テーマ
-#zplug "yous/lime"
-
-# 構文のハイライト(https://github.com/zsh-users/zsh-syntax-highlighting)
-zplug "zsh-users/zsh-syntax-highlighting"
-## タイプ補完
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-
-zplug "chrissicool/zsh-256color"
-zplug "b4b4r07/enhancd"
-
-#zplug "sindresorhus/pure"
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-  printf "Install? [y/N]: "
-  if read -q; then
-    echo; zplug install
-  fi
-fi
-## Then, source plugins and add commands to $PATH
-zplug load
-
-###############################################################################
-# prompt
-###############################################################################
-
-autoload -Uz promptinit
-promptinit
-#prompt adam1
-autoload -Uz vcs_info
-precmd() {
-  vcs_info
-}
-setopt prompt_subst
-zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
-zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
-
-VIMODE='[INSERT]'
-function zle-keymap-select {
-  VIMODE="${${KEYMAP/vicmd/[NORMAL]}/(main|viins)/[INSERT]}"
-  zle reset-prompt
-}
-zle -N zle-keymap-select
-bindkey -M viins 'jj' vi-cmd-mode
-
-PROMPT='${VIMODE} %D{%Y/%m/%d %H:%M:%S} %{$fg[magenta]%}(%~)%{$reset_color%} ${vcs_info_msg_0_}
-%{$fg[cyan]%}%n@%m%{$reset_color%} %# '
-#%{$fg[cyan]%}%n@%m%{$reset_color%} %# '
-#PROMPT='%D{%Y/%m/%d %H:%M:%S} ${fg[green]}(%~)${reset_color} ${fg[magenta]}${vcs_info_msg_0_}${reset_color}
-#%n@%m %# '
-
-# コマンド実行時に時刻を更新する
-re-prompt() {
-    zle .reset-prompt
-    zle .accept-line
-}
-
-zle -N accept-line re-prompt
-
-###############################################################################
-
-setopt histignorealldups sharehistory
-# Avoid background processes to not bother Windows
-unsetopt BG_NICE
-
-# Use emacs keybindings even if our EDITOR is set to vi
-bindkey -v
-
-# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=1000
-
-# コマンド実行時に時刻を更新する
-re-prompt() {
-    zle .reset-prompt
-    zle .accept-line
-}
-
-zle -N accept-line re-prompt
-
-###############################################################################
-
+######################################
 setopt histignorealldups sharehistory
 # Avoid background processes to not bother Windows
 unsetopt BG_NICE
@@ -135,26 +51,9 @@ setopt print_eight_bit
 setopt nolistbeep
 setopt no_beep
 
-# vagrant
-export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
+source $ZFILES/.zexports
+source $ZFILES/.zaliases
 
-
-## golang
-# export GOPATH=$HOME/go
-# export PATH=$PATH:/usr/lib/go-1.10/bin
-# export PATH=$PATH:$GOPATH/bin
-
-## pyenv
-PYENV_ROOT="$HOME/.pyenv"
-PATH="$PYENV_ROOT/shims:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-#eval "$(pyenv virtualenv-init -)"
-
-export XDG_CONFIG_HOME=~/.config
-export XDG_CACHE_HOME=~/.cache
-
-## alias
-alias vim="/usr/bin/nvim"
-alias ovim="/usr/bin/vim"
+#if type zprof > /dev/null 2>&1; then
+#  zprof | less
+#fi

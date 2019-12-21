@@ -5,17 +5,17 @@ autoload -Uz _zplugin
 zplugin load mafredri/zsh-async
 
 ## history関係
-zplugin ice wait'!3'; zplugin load zsh-users/zsh-history-substring-search
+zplugin ice wait'!1'; zplugin load zsh-users/zsh-history-substring-search
 
 # 構文のハイライト(https://github.com/zsh-users/zsh-syntax-highlighting)
-zplugin ice wait'!3'; zplugin load zsh-users/zsh-syntax-highlighting
+zplugin ice wait'!1'; zplugin load zsh-users/zsh-syntax-highlighting
 
 ### タイプ補完
-zplugin ice wait'!3'; zplugin load zsh-users/zsh-autosuggestions
-zplugin ice wait'!3'; zplugin load zsh-users/zsh-completions
+zplugin ice wait'!1'; zplugin load zsh-users/zsh-autosuggestions
+zplugin ice wait'!1'; zplugin load zsh-users/zsh-completions
 
-zplugin ice wait'!3'; zplugin load chrissicool/zsh-256color
-zplugin ice wait'!3'; zplugin load b4b4r07/enhancd
+zplugin ice wait'!1'; zplugin load chrissicool/zsh-256color
+zplugin ice wait'!1'; zplugin load b4b4r07/enhancd
 
 
 #autoload -U compinit

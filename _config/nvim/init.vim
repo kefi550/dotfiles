@@ -2,6 +2,7 @@ filetype indent on
 
 set noswapfile
 set encoding=utf-8
+set termencoding=utf-8
 scriptencoding utf-8
 " 保存時の文字コード
 set fileencoding=utf-8
@@ -95,6 +96,12 @@ inoremap <silent> jj <ESC>
 inoremap <silent> <C-j> j
 inoremap <silent> kk <ESC>
 inoremap <silent> <C-k> k
+
+" ctrl + hjklで画面移動
+noremap <silent> <C-h> <C-w><C-h>
+noremap <silent> <C-j> <C-w><C-j>
+noremap <silent> <C-k> <C-w><C-k>
+noremap <silent> <C-l> <C-w><C-l>
 
 let g:python_host_prog = '/usr/bin/python2'
 let g:python3_host_prog = '/home/kefi/.pyenv/shims/python'

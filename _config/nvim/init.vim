@@ -31,6 +31,40 @@ set smartindent
 " smartindentで増減する幅"
 set shiftwidth=2
 
+" インデント
+if has("autocmd")
+  " ファイルタイプの検索を有効にする
+  filetype plugin on
+  " ファイルタイプに合わせたインデントを利用
+  filetype indent on
+  "sw=softtabstop, sts=shiftwidth, ts=tabstop, et=expandtabの略
+  autocmd FileType c           setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType html        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType ruby        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType js          setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType zsh         setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType python      setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType scala       setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType json        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType yml         setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType yaml        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType html        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType css         setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType scss        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType sass        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType javascript  setlocal sw=4 sts=4 ts=4 et
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+" yaml書くとき
+let g:ansible_options = {'ignore_blank_lines': 0}
+
+augroup filetypedetect
+  au BufRead,BufNewFile *.yaml setfiletype ansible
+  au BufRead,BufNewFile *.yml  setfiletype ansible
+augroup END
+""""""""""""""""""""""""""""""""""""""""""""""""
+
 " インクリメンタルサーチ. １文字入力毎に検索を行う
 set incsearch
 " 検索パターンに大文字小文字を区別しない
@@ -102,6 +136,16 @@ noremap <silent> <C-h> <C-w><C-h>
 noremap <silent> <C-j> <C-w><C-j>
 noremap <silent> <C-k> <C-w><C-k>
 noremap <silent> <C-l> <C-w><C-l>
+
+""""""""""""
+" WSL
+nnoremap <silent>yy :.w !win32yank -i<CR><CR>
+vnoremap <silent>y :w !win32yank -i<CR><CR>
+nnoremap <silent>dd :.w !win32yank -i<CR>dd
+vnoremap <silent>d x:let pos = getpos(".")<CR>GpVG:w !win32yank -i<CR>VGx:call setpos(".", pos)<CR>
+nnoremap <silent>p :r !win32yank -o<CR>
+vnoremap <silent>p :r !win32yank -o<CR>
+""""""""""""""""
 
 let g:python_host_prog = '/usr/bin/python2'
 let g:python3_host_prog = '/home/kefi/.pyenv/shims/python'

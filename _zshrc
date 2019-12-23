@@ -54,6 +54,9 @@ setopt no_beep
 source $ZFILES/.zexports
 source $ZFILES/.zaliases
 
+export DISPLAY=localhost:0.0
+export PATH="$PATH:/mnt/c/Program Files/win32yank-x64"
+
 #if type zprof > /dev/null 2>&1; then
 #  zprof | less
 #fi

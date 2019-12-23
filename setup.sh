@@ -11,3 +11,4 @@ ln -snfv $DOTFILE_DIR/_config ~/.config
 ln -snfv $DOTFILE_DIR/_tmux.conf ~/.tmux.conf
 
 # TODO: zpluginのinstall
+# TODO: brewのinstall

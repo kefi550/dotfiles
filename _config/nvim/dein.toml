@@ -60,6 +60,12 @@ hook_add = '''
   " autocmd VimEnter * VimFiler -split -simple -winwidth=29 -no-quit
 '''
 
+[[plugins]]
+repo = 'Shougo/vimshell'
+
+[[plugins]]
+repo = 'kana/vim-operator-user'
+
 ##ディレクトリ表示
 #[[plugins]]
 #repo = 'scrooloose/nerdtree'
@@ -68,16 +74,14 @@ hook_add = '''
 [[plugins]]
 repo = 'Townk/vim-autoclose'
 
+# yamlインデント
+[[plugins]]
+repo = 'chase/vim-ansible-yaml'
+
 # syntax check
 [[plugins]]
 repo =  'scrooloose/syntastic'
 
-[[plugins]]
-repo = 'Shougo/vimshell'
-
-
-[[plugins]]
-repo = 'kana/vim-operator-user'
 
 # ヤンクしたとこが一瞬ハイライト
 [[plugins]]

@@ -18,6 +18,15 @@ build = 'make'
 #'''
 
 [[plugins]]
+repo = 'Shougo/unite.vim'
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
 repo = 'thinca/vim-quickrun'
 hook_post_update = '''
   let g:quickrun_config = {'*': {'hook/time/enable': '1'},}
@@ -37,11 +46,7 @@ repo = 'Shougo/neosnippet'
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'     
 
-[[plugins]]
-repo = 'cespare/vim-toml'
 
-[[plugins]]
-repo = 'Shougo/unite.vim'
 
 #ディレクトリ表示
 [[plugins]]
@@ -82,7 +87,6 @@ repo = 'chase/vim-ansible-yaml'
 [[plugins]]
 repo =  'scrooloose/syntastic'
 
-
 # ヤンクしたとこが一瞬ハイライト
 [[plugins]]
 repo = 'haya14busa/vim-operator-flashy'
@@ -91,14 +95,6 @@ hook_source = '''
   nmap Y <Plug>(operator-flashy)$
 '''
 
-[[plugins]]
-repo = 'itchyny/lightline.vim'
-hook_post_update = '''
-  source ~/.config/nvim/plugins/lightline.vim
-'''
-
-[[plugins]]
-repo = 'ujihisa/unite-colorscheme'
 
 ##############################################
 # コード補完
@@ -106,13 +102,54 @@ repo = 'ujihisa/unite-colorscheme'
 #repo = 'davidhalter/jedi-vim'
 #on_ft = ['python']
 
+#[[plugins]]
+#repo = 'autozimu/LanguageClient-neovim'
+#rev = 'next'
+#build = 'bash install.sh'
+#hook_add = '''
+#  let g:LanguageClient_serverCommands = {
+#        \ 'python': ['pyls'],
+#  \ }
+#'''
+
 [[plugins]]
-repo = 'autozimu/LanguageClient-neovim'
-rev = 'next'
-build = 'bash install.sh'
-hook_add = '''
-  let g:LanguageClient_serverCommands = {
-        \ 'python': ['pyls'],
-  \ }
+repo = 'prabirshrestha/vim-lsp'
+hook_add='''
+if executable('go-langserver')
+  au User lsp_setup call lsp#register_server({
+    \ 'name': 'go-langserver',
+    \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio']},
+    \ 'whitelist': ['go'],
+    \ })
+endif
+if (executable('pyls'))
+  au User lsp_setup call lsp#register_server({
+  \ 'name': 'pyls',
+  \ 'cmd': {server_info->[expand(s:pyls_path)]},
+  \ 'whitelist': ['python']
+  \ })
+endif
 '''
+
+#let s:pyls_path = fnamemodify(g:python3_host_prog, ':h') . '/'. 'pyls'
+
+[[plugins]]
+repo = 'chase/vim-ansible-yaml'
+hook_add='''
+  let g:ansible_options = {'ignore_blank_lines': 0}
+'''
+
+
+##############################################
+
+## 色
+#[[plugins]]
+#repo = 'itchyny/lightline.vim'
+#hook_post_update = '''
+#  source ~/.config/nvim/plugins/lightline.vim
+#'''
+
+[[plugins]]
+repo = 'ujihisa/unite-colorscheme'
+
 ##############################################

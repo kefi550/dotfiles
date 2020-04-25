@@ -1,13 +1,13 @@
-export ZFILES=~/.zfiles
+export ZFILES=~/.config/zsh
 #export ZPLUG_HOME=~/.zplug
 
 ## plugin
-#source $ZFILES/.zplugin.zplug
-#source $ZFILES/.zplugin_lazy
-source $ZFILES/.zplugin
+#source $ZFILES/zplug
+#source $ZFILES/zplug_lazy
+source $ZFILES/zplugin
 
 ## prompt
-source $ZFILES/.zprompt
+source $ZFILES/zprompt
 
 ######################################
 setopt histignorealldups sharehistory
@@ -61,11 +61,18 @@ setopt print_eight_bit
 setopt nolistbeep
 setopt no_beep
 
-source $ZFILES/.zexports
-source $ZFILES/.zaliases
+source $ZFILES/zexport
+source $ZFILES/zalias
 
 export DISPLAY=localhost:0.0
 export PATH="$PATH:/mnt/c/Program Files/win32yank-x64"
+
+export VAGRANT_WSL_WINDOWS_ACCESS_USER="ishibashi"
+export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
+export VAGRANT_WSL_WINDOWS_ACCESS_USER_HOME_PATH="/mnt/c/vagrant"
+export PATH="$PATH:/mnt/c/Windows/System32/"
+export PATH="$PATH:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/"
+#export PATH="$PATH:/mnt/c/HashiCorp/Vagrant/wslbin"
 
 #if type zprof > /dev/null 2>&1; then
 #  zprof | less

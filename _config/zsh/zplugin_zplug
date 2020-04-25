@@ -1,0 +1,8 @@
+autoload -U compinit
+compinit -u
+autoload -Uz colors
+colors
+
+source $ZPLUG_HOME/init.zsh
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+#zplug 'zplug/zplug'

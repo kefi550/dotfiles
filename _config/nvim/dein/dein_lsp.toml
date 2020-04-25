@@ -1,0 +1,179 @@
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+on_event=['InsertEnter']
+#on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+hook_add = '''
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_popup_delay = 0
+let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+" let g:asyncomplete_enable_for_all = 0
+" autocmd vimrc FileType autohotkey,autoit,cfg,git,go,groovy,java,javascript,python,snippet,toml,vim,vb,xsl call asyncomplete#enable_for_buffer()"
+imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-y>" : "\<CR>"
+imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : pumvisible() ? "\<C-y>" : "\<CR>"
+'''
+
+#[[plugins]]
+#repo = 'prabirshrestha/asyncomplete-buffer.vim'
+#on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+#hook_source = '''
+#autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+#  \ 'name': 'buffer',
+#  \ 'priority': 5,
+#  \ 'whitelist': ['*'],
+#  \ 'completor': function('asyncomplete#sources#buffer#completor'),
+#\ }))
+#'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+on_ft = ['python', 'go']
+depends = ['asyncomplete.vim', 'vim-lsp']
+
+[[plugins]]
+repo = 'Shougo/echodoc.vim'
+hook_add= '''
+  let g:echodoc#enable_at_startup=1
+  let g:echodoc#type = 'signature'
+'''
+
+#[[plugins]]
+#repo = 'Shougo/deoplete.nvim'
+#hook_add = '''
+#  source ~/.config/nvim/plugins/deoplete.vim
+#  let g:deoplete#enable_at_startup = 1
+#  let g:deoplete#auto_completion_start_length = 1
+#'''
+#
+#[[plugins]]
+#repo = 'roxma/nvim-yarp'
+#
+#[[plugins]]
+#repo = 'roxma/vim-hug-neovim-rpc'
+#
+#[[plugins]]
+#repo = 'Shougo/deoplete-vim-lsp'
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'     
+
+#[[plugins]]
+#repo = 'mattn/vim-lsp-settings'
+#
+#[[plugins]]
+#repo = 'mattn/vim-lsp-icons'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+hook_add = '''
+" lint 
+" let g:lsp_diagnostics_enabled = 1
+" debug
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('~/vim-lsp.log')
+let s:pyls_path = expand('~/.pyenv/versions/neovim-3/bin/pyls')
+" let g:lsp_async_completion = 1
+
+" python
+if (executable(expand(s:pyls_path)))
+  au User lsp_setup call lsp#register_server({
+  \ 'name': 'pyls_neovim3',
+  \ 'cmd': {server_info->[expand(s:pyls_path)]},
+  \ 'whitelist': ['python']
+  \ })
+endif
+
+autocmd FileType python setlocal omnifunc=lsp#complete
+
+function SetLSPShortcuts()
+  nnoremap <leader>ld :<C-u>LspDefinition<CR>
+endfunction()
+
+augroup LSP
+  autocmd!
+  autocmd FileType python call SetLSPShortcuts()
+augroup END
+
+let g:lsp_preview_max_height = 1
+let g:lsp_preview_max_width = 1
+let g:lsp_signature_help_enabled = 0
+'''
+
+
+
+
+##############################################
+# コード補完
+#[[plugins]]
+#repo = 'davidhalter/jedi-vim'
+#on_ft = ['python']
+
+# [[plugins]]
+# repo = 'autozimu/LanguageClient-neovim'
+# rev = 'next'
+# build = 'bash install.sh'
+# hook_add = '''
+#  " let g:LanguageClient_loggingLevel='DEBUG'
+#  let g:LanguageClient_autoStart = 1
+#  let g:LanguageClient_loggingFile =  expand('~/.local/share/nvim/LanguageClient.log') 
+#
+#  function SetLSPShortcuts()
+#    nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
+#    nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
+#    nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
+#    nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
+#    nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
+#    nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
+#    nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
+#    nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
+#    nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
+#    nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
+#  endfunction()
+#  
+#  augroup LSP
+#    autocmd!
+#    " autocmd FileType cpp,c call SetLSPShortcuts()
+#    autocmd FileType python call SetLSPShortcuts()
+#  augroup END
+#
+#  let g:LanguageClient_serverCommands = {
+#        \ 'python': ['pyls'],
+#        \ 'go': ['gopls'],
+#  \ }
+#  ""      \ 'go': ['go-langserver', '-gocodecompletion'],
+#  "      \ 'go': ['gopls','-format-tool','gofmt','-lint-tool','golint'],
+#
+#  """"""""""""""""""""""""""""
+#  " python
+#  function! s:findRoot(target)
+#    let dir = getcwd()
+#    while 1
+#      let files = split(globpath(l:dir, '*'), '\n')
+#      for f in l:files
+#          if a:target == fnamemodify(f, ':t')
+#              return l:dir
+#          endif
+#      endfor
+#      if l:dir == "/"
+#        break
+#      endif
+#      let dir = fnamemodify(l:dir, ':h')
+#    endwhile
+#    return ""
+#  endfunction
+#
+#  function! s:setVenv()
+#    let dir = s:findRoot('Pipfile')
+#    echo l:dir
+#    if dir != ""
+#      let $VIRTUAL_ENV = trim(system("cd " . l:dir . "; pipenv --venv"))
+#    endif
+#  endfunction
+#  autocmd FileType python call s:setVenv()
+#  """"""""""""""""""""""""""""
+#'''

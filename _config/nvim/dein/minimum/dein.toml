@@ -1,0 +1,112 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+#[[plugins]]
+#repo = 'Shougo/unite.vim'
+#
+#
+#[[plugins]]
+#repo = 'junegunn/fzf.vim'
+
+#[[plugins]]
+#repo = 'Shougo/echodoc.vim'
+#hook_add= '''
+#  let g:echodoc#enable_at_startup=1
+#  let g:echodoc#type = 'signature'
+#'''
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+on_event=['InsertEnter']
+#on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+hook_add = '''
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_popup_delay = 0
+let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+" let g:asyncomplete_enable_for_all = 0
+" autocmd vimrc FileType autohotkey,autoit,cfg,git,go,groovy,java,javascript,python,snippet,toml,vim,vb,xsl call asyncomplete#enable_for_buffer()"
+'''
+
+#[[plugins]]
+#repo = 'prabirshrestha/asyncomplete-buffer.vim'
+#on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+#hook_source = '''
+#autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+#  \ 'name': 'buffer',
+#  \ 'priority': 5,
+#  \ 'whitelist': ['*'],
+#  \ 'completor': function('asyncomplete#sources#buffer#completor'),
+#\ }))
+#'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+on_ft = ['python', 'go']
+depends = ['asyncomplete.vim', 'vim-lsp']
+
+#[[plugins]]
+#repo = 'Shougo/deoplete.nvim'
+#hook_add = '''
+#  source ~/.config/nvim/plugins/deoplete.vim
+#  let g:deoplete#enable_at_startup = 1
+#  let g:deoplete#auto_completion_start_length = 1
+#'''
+#
+#[[plugins]]
+#repo = 'roxma/nvim-yarp'
+#
+#[[plugins]]
+#repo = 'roxma/vim-hug-neovim-rpc'
+#
+#[[plugins]]
+#repo = 'Shougo/deoplete-vim-lsp'
+
+#[[plugins]]
+#repo = 'Shougo/neosnippet'
+#
+#[[plugins]]
+#repo = 'Shougo/neosnippet-snippets'     
+
+#[[plugins]]
+#repo = 'mattn/vim-lsp-settings'
+#
+#[[plugins]]
+#repo = 'mattn/vim-lsp-icons'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+hook_add = '''
+" lint 
+" let g:lsp_diagnostics_enabled = 1
+" debug
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('~/vim-lsp.log')
+let s:pyls_path = expand('~/.pyenv/versions/neovim-3/bin/pyls')
+" let g:lsp_async_completion = 1
+
+" python
+if (executable(expand(s:pyls_path)))
+  au User lsp_setup call lsp#register_server({
+  \ 'name': 'pyls_neovim3',
+  \ 'cmd': {server_info->[expand(s:pyls_path)]},
+  \ 'whitelist': ['python']
+  \ })
+endif
+
+autocmd FileType python setlocal omnifunc=lsp#complete
+
+function SetLSPShortcuts()
+  nnoremap <leader>ld :<C-u>LspDefinition<CR>
+endfunction()
+
+augroup LSP
+  autocmd!
+  autocmd FileType python call SetLSPShortcuts()
+augroup END
+'''

@@ -1,5 +1,4 @@
 [user]
-	name = kefi550
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim

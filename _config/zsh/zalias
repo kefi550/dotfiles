@@ -1,6 +1,9 @@
 
 ## alias
-alias vim="/usr/bin/nvim"
-alias ovim="/usr/bin/vim"
+
+if which nvim &> /dev/null; then
+  alias vim="/usr/bin/nvim"
+  alias ovim="/usr/bin/vim"
+fi
 
 alias ll="ls -al"

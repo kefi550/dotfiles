@@ -4,7 +4,7 @@ export ZFILES=~/.config/zsh
 ## plugin
 #source $ZFILES/zplug
 #source $ZFILES/zplug_lazy
-source $ZFILES/zplugin
+source $ZFILES/zinit
 
 ## prompt
 source $ZFILES/zprompt

@@ -7,12 +7,10 @@ ln -snfv $DOTFILE_DIR/_zshrc ~/.zshrc
 ln -snfv $DOTFILE_DIR/_config ~/.config
 ln -snfv $DOTFILE_DIR/_tmux.conf ~/.tmux.conf
 ln -snfv $DOTFILE_DIR/_gitconfig ~/.gitconfig
+ln -snfv $DOTFILE_DIR/_textlintrc ~/.textlintrc
 #ln -snfv $DOTFILE_DIR/_vimrc ~/.vimrc
 
-## TODO: zpluginのinstall
-## TODO: brewのinstall
-#sudo apt install linuxbrew-wrapper
-#brew doctor
+
 #brew install fzf
 #
 ## vagrant

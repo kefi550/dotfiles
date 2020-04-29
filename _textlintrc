@@ -1,0 +1,14 @@
+{
+    "rules": {
+      "max-ten": {
+        "max" : 3
+      },
+      "prh": {
+        "rulePaths": [
+          "~/.config/textlint/prh.yaml"
+        ]
+      },
+      "no-mix-dearu-desumasu": true,
+      "ja-no-mixed-period": true
+    }
+}

@@ -40,5 +40,10 @@ if [ -d /home/linuxbrew/.linuxbrew ] ; then
   #umask 002
 fi
 
+## yarn
+if which yarn &> /dev/null ; then
+  export PATH="$PATH:`yarn global bin`"
+fi
+
 # docker for windows
 #export DOCKER_HOST=tcp://localhost:2375

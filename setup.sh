@@ -12,6 +12,7 @@ ln -snfv $DOTFILE_DIR/_textlintrc ~/.textlintrc
 
 
 #brew install fzf
+# install pynvim
 #
 ## vagrant
 ## https://qiita.com/apatchk/items/8b1029ceaee60d3e18a2

@@ -31,6 +31,14 @@ if [ -d $HOME/.pyenv ]; then
   #export PIPENV_VENV_IN_PROJECT=1
 fi
 
+# poetry
+if [ -d $HOME/.poetry ]; then
+  export PATH=$HOME/.poetry/bin:$PATH
+fi
+
+
+
+
 # brew for ubuntu
 if [ -d /home/linuxbrew/.linuxbrew ] ; then
 #if which brew &> /dev/null; then

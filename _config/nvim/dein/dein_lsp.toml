@@ -4,7 +4,7 @@ repo = 'prabirshrestha/async.vim'
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete.vim'
 on_event=['InsertEnter']
-#on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
 hook_add = '''
 let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_popup_delay = 0
@@ -26,6 +26,21 @@ imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : pumvisi
 #  \ 'completor': function('asyncomplete#sources#buffer#completor'),
 #\ }))
 #'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-file.vim'
+depends = ['asyncomplete.vim']
+hook_source = '''
+  augroup vimrc
+    autocmd!
+  augroup END
+  autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    \ 'name': 'file',
+    \ 'whitelist': ['*'],
+    \ 'priority': 10,
+    \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
+'''
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
@@ -64,9 +79,9 @@ repo = 'Shougo/neosnippet-snippets'
 
 #[[plugins]]
 #repo = 'mattn/vim-lsp-settings'
-#
-#[[plugins]]
-#repo = 'mattn/vim-lsp-icons'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-icons'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
@@ -76,14 +91,15 @@ hook_add = '''
 " debug
 let g:lsp_log_verbose = 1
 let g:lsp_log_file = expand('~/vim-lsp.log')
-let s:pyls_path = expand('~/.pyenv/versions/neovim-3/bin/pyls')
-" let g:lsp_async_completion = 1
+" let s:pyls_path = expand('~/.pyenv/versions/neovim-3/bin/pyls')
+let g:pyls_path = g:python3_host_prog_dir . '/pyls'
+let g:lsp_async_completion = 1
 
 " python
-if (executable(expand(s:pyls_path)))
+if (executable(expand(g:pyls_path)))
   au User lsp_setup call lsp#register_server({
   \ 'name': 'pyls_neovim3',
-  \ 'cmd': {server_info->[expand(s:pyls_path)]},
+  \ 'cmd': {server_info->[expand(g:pyls_path)]},
   \ 'whitelist': ['python']
   \ })
 endif
@@ -103,8 +119,6 @@ let g:lsp_preview_max_height = 1
 let g:lsp_preview_max_width = 1
 let g:lsp_signature_help_enabled = 0
 '''
-
-
 
 
 ##############################################

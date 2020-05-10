@@ -4,6 +4,8 @@ elseif has("unix")
   let g:python3_host_prog = $HOME . '/.pyenv/shims/python'
 endif
 
+let g:python_host_prog_dir = $HOME . '/.neovimenv/neovim-2/.venv/bin'
+let g:python3_host_prog_dir = $HOME . '/.neovimenv/neovim-3/.venv/bin'
 let g:python_host_prog = $HOME.'/.neovimenv/neovim-2/.venv/bin/python'
 let g:python3_host_prog = $HOME . '/.neovimenv/neovim-3/.venv/bin/python'
 if exists("$VIRTUAL_ENV")

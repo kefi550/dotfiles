@@ -6,9 +6,9 @@ authors = ["kefi550"]
 
 [tool.poetry.dependencies]
 python = "^2.7"
-neovim = "^0.3.1"
-pynvim = "^0.4.1"
-trollius = "^2.2.post1"
+neovim = "*"
+pynvim = "*"
+trollius = "*"
 
 [tool.poetry.dev-dependencies]
 

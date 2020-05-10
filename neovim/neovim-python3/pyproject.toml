@@ -6,8 +6,10 @@ authors = ["kefi550"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-pynvim = "^0.4.1"
-neovim = "^0.3.1"
+pynvim = "*"
+neovim = "*"
+python-language-server = "*"
+importlib_metadata = "*"
 
 [tool.poetry.dev-dependencies]
 

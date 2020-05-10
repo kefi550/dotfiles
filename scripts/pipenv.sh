@@ -1,3 +1,3 @@
-#!/bin/sh
+#!/usr/bin/zsh
 
-brew install poetry
+brew install pipenv

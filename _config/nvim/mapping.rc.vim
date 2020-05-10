@@ -13,10 +13,14 @@ noremap <silent> <C-l> <C-w><C-l>
 
 """"""""""""
 " WSL
-nnoremap <silent>yy :.w !win32yank -i<CR><CR>
-vnoremap <silent>y :w !win32yank -i<CR><CR>
-nnoremap <silent>dd :.w !win32yank -i<CR>dd
-vnoremap <silent>d x:let pos = getpos(".")<CR>GpVG:w !win32yank -i<CR>VGx:call setpos(".", pos)<CR>
-nnoremap <silent>p :r !win32yank -o<CR>
-vnoremap <silent>p :r !win32yank -o<CR>
+let g:is_wsl = strlen(system('uname -a | grep Microsoft')) != 0
+
+if g:is_wsl
+  nnoremap <silent>yy :.w !win32yank -i<CR><CR>
+  vnoremap <silent>y :w !win32yank -i<CR><CR>
+  nnoremap <silent>dd :.w !win32yank -i<CR>dd
+  vnoremap <silent>d x:let pos = getpos(".")<CR>GpVG:w !win32yank -i<CR>VGx:call setpos(".", pos)<CR>
+  nnoremap <silent>p :r !win32yank -o<CR>
+  vnoremap <silent>p :r !win32yank -o<CR>
+endif
 """"""""""""""""

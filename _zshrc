@@ -1,12 +1,8 @@
 export ZFILES=~/.config/zsh
 #export ZPLUG_HOME=~/.zplug
 
-## plugin
-#source $ZFILES/zplug
-#source $ZFILES/zplug_lazy
-source $ZFILES/zinit
 
-## prompt
+# prompt
 source $ZFILES/zprompt
 
 ######################################
@@ -63,6 +59,12 @@ setopt no_beep
 
 source $ZFILES/zexport
 source $ZFILES/zalias
+
+## plugin
+#source $ZFILES/zplug
+#source $ZFILES/zplug_lazy
+source $ZFILES/zinit
+
 
 export DISPLAY=localhost:0.0
 export PATH="$PATH:/mnt/c/Program Files/win32yank-x64"

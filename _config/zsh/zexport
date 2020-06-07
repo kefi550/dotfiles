@@ -38,6 +38,11 @@ fi
 
 export PIPENV_VENV_IN_PROJECT=1
 
+# asdf
+if [ -d $HOME/.asdf ]; then
+  . $HOME/.asdf/asdf.sh
+  fpath=(${ASDF_DIR}/completions $fpath)
+fi
 
 # brew for ubuntu
 if [ -d /home/linuxbrew/.linuxbrew ] ; then

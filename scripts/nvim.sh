@@ -3,8 +3,7 @@
 NEOVIM_PYTHON2_VERSION="2.7.17"
 NEOVIM_PYTHON3_VERSION="3.8.1"
 
-which nvim &> /dev/null
-if [ $? != 0 ]; then
+if ! [ -x "$(which nvim)" ]; then
   brew install nvim
 fi
 

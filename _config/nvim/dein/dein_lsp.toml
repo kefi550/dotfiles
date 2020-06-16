@@ -4,7 +4,7 @@ repo = 'prabirshrestha/async.vim'
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete.vim'
 on_event=['InsertEnter']
-on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+on_ft = ['sh', 'autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
 hook_add = '''
 let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_popup_delay = 0
@@ -54,6 +54,18 @@ hook_add= '''
   let g:echodoc#type = 'signature'
 '''
 
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
+depends = ['neosnippet.vim']
+hook_source = '''
+  autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+      \ 'name': 'neosnippet',
+      \ 'whitelist': ['*'],
+      \ 'priority': 9,
+      \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
+      \ }))
+'''
+
 #[[plugins]]
 #repo = 'Shougo/deoplete.nvim'
 #hook_add = '''
@@ -72,7 +84,29 @@ hook_add= '''
 #repo = 'Shougo/deoplete-vim-lsp'
 
 [[plugins]]
-repo = 'Shougo/neosnippet'
+repo = 'Shougo/neosnippet.vim'
+hook_source = '''
+  " <TAB>: completion.
+  inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
+
+  " Plugin key-mappings.
+  imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+
+  " SuperTab like snippets behavior.
+  imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
+  smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
+
+  let g:neosnippet#data_directory = expand('~/_vim/.neosnippet')
+
+  " Tell Neosnippet about the other snippets
+  " gosnippets は vim-go がうまいことやってくれるはずだけど、なんかうまくいかないので直接追加。
+  let g:neosnippet#snippets_directory = [
+        \   '~/vimfiles/snippets',
+        \   '~/_vim/dein/repos/github.com/honza/vim-snippets/snippets/',
+        \   '~/_vim/dein/repos/github.com/fatih/vim-go/gosnippets/snippets/',
+        \ ]
+'''
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'     

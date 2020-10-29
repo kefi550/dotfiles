@@ -15,3 +15,6 @@ runtime! ./indent_ft.vim
 
 " dein
 runtime! dein/dein.rc.vim
+
+autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
+

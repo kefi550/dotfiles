@@ -111,8 +111,8 @@ hook_source = '''
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'     
 
-#[[plugins]]
-#repo = 'mattn/vim-lsp-settings'
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
 
 [[plugins]]
 repo = 'mattn/vim-lsp-icons'

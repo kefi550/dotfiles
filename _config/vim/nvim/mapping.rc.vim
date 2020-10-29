@@ -13,7 +13,7 @@ noremap <silent> <C-l> <C-w><C-l>
 
 """"""""""""
 " WSL
-let g:is_wsl = strlen(system('uname -a | grep Microsoft')) != 0
+let g:is_wsl = strlen(system('uname -a | grep microsoft')) != 0
 
 if g:is_wsl
   nnoremap <silent>yy :.w !win32yank -i<CR><CR>

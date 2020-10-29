@@ -63,6 +63,9 @@ repo = 'Townk/vim-autoclose'
 # yamlインデント
 [[plugins]]
 repo = 'chase/vim-ansible-yaml'
+hook_add='''
+  let g:ansible_options = {'ignore_blank_lines': 0}
+'''
 
 # syntax check
 [[plugins]]
@@ -77,24 +80,21 @@ hook_source = '''
 '''
 
 [[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+ 
+[[plugins]]
 repo = 'junegunn/fzf.vim'
 
-
 #[[plugins]]
-#repo = 'chase/vim-ansible-yaml'
+#repo = 'w0rp/ale'
 #hook_add='''
-#  let g:ansible_options = {'ignore_blank_lines': 0}
+#let g:ale_linters = {
+#\  'markdown': ['textlint'],
+#\ }
+#" let g:ale_completion_enabled = 1
+#let g:ale_enabled = 1
 #'''
-
-[[plugins]]
-repo = 'w0rp/ale'
-hook_add='''
-let g:ale_linters = {
-\  'markdown': ['textlint'],
-\ }
-" let g:ale_completion_enabled = 1
-let g:ale_enabled = 1
-'''
 
 ##############################################
 
@@ -102,7 +102,7 @@ let g:ale_enabled = 1
 #[[plugins]]
 #repo = 'itchyny/lightline.vim'
 #hook_post_update = '''
-#  source ~/.config/nvim/plugins/lightline.vim
+#  source ~/.config/vim/nvim/plugins/lightline.vim
 #'''
 
 #[[plugins]]
@@ -116,8 +116,6 @@ repo = 'vim-airline/vim-airline'
 hook_add='''
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#formatter = 'default'
-  let g:airline_theme='luna'
+  let g:airline_theme='molokai'
 '''
-
-
-##############################################
+#############################################

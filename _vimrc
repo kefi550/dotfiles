@@ -1,46 +1,27 @@
-set visualbell t_vb=
+let g:config_dir = expand('~/.config/vim')
+let &runtimepath=&runtimepath . ',' . g:config_dir
+let &runtimepath=&runtimepath . ',' . g:config_dir . '/ovim'
 
-if &compatible
-  set nocompatible               " Be iMproved
-endif
 
-" Required:
-set runtimepath^=/home/kefi/.vim/bundle/neobundle.vim/
+" キーマッピング
+runtime! mapping.rc.vim
 
-" Required:
-call neobundle#begin(expand('/home/kefi/.vim/bundle'))
+" provider (python)
+runtime! provider.vim
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+" ファイルタイプ
+runtime! ft.vim
 
-" Add or remove your Bundles here:
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'flazz/vim-colorschemes'
+" インデント
+runtime! indent_ft.vim
 
-" You can specify revision/branch/tag.
-NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+" python
+runtime! python.vim
 
-NeoBundle 'tomasr/molokai'
+" dein
+runtime! dein/dein.rc.vim
 
-NeoBundle 'Shougo/vimfiler'
-NeoBundle 'Shougo/vimproc'
+" オプション
+runtime! options.rc.vim
 
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'ujihisa/unite-colorscheme'
-
-" Required:
-call neobundle#end()
-
-" Required:
-filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-" NeoBundleCheck
-
-set ambiwidth=double
-set fileencodings=utf-8,cp932
+autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript

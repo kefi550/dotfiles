@@ -114,33 +114,26 @@ repo = 'Shougo/neosnippet-snippets'
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
 
-#[[plugins]]
-#repo = 'mattn/vim-lsp-icons'
-#hook_post_source = '''
-#  let g:lsp_signs_warning.text = 'w'
-#'''
+[[plugins]]
+repo = 'mattn/vim-lsp-icons'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
 hook_add = '''
 " lint 
 let g:lsp_diagnostics_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
 " debug
 let g:lsp_log_verbose = 1
 let g:lsp_log_file = expand('~/vim-lsp.log')
 let g:lsp_async_completion = 1
 
 " python
-if executable('/home/kefi/.local/share/vim-lsp-settings/servers/pyls/pyls-all')
-  augroup LspPython
-    au!
-    au User lsp_setup call lsp#register_server({
-      \ 'name': 'pyls',
-      \ 'cmd': {server_info->['/home/kefi/.local/share/vim-lsp-settings/servers/pyls/pyls-all']},
-      \ 'whitelist': ['python'],
-      \ })
-  augroup end
+if (executable(expand(g:pyls_path)))
+  au User lsp_setup call lsp#register_server({
+  \ 'name': 'pyls',
+  \ 'cmd': {server_info->['pyls')]},
+  \ 'whitelist': ['python']
+  \ })
 endif
 
 autocmd FileType python setlocal omnifunc=lsp#complete
@@ -154,9 +147,9 @@ augroup LSP
   autocmd FileType python call SetLSPShortcuts()
 augroup END
 
-" let g:lsp_preview_max_height = 1
-" let g:lsp_preview_max_width = 1
-" let g:lsp_signature_help_enabled = 0
+let g:lsp_preview_max_height = 1
+let g:lsp_preview_max_width = 1
+let g:lsp_signature_help_enabled = 0
 '''
 
 

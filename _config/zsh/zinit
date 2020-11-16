@@ -17,6 +17,9 @@ zinit ice wait'!1'; zinit load zsh-users/zsh-completions
 zinit ice wait'!1'; zinit load chrissicool/zsh-256color
 zinit ice wait'!1'; zinit load b4b4r07/enhancd
 
+### emoji
+zinit ice wait'!2'; zinit load b4b4r07/emoji-cli
+
 autoload -Uz compinit
 compinit
 autoload -Uz colors

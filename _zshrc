@@ -1,5 +1,14 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 export ZFILES=~/.config/zsh
 #export ZPLUG_HOME=~/.zplug
+
+export TERM=xterm-256color
 
 # prompt
 source $ZFILES/zprompt
@@ -24,8 +33,6 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
       eval "$("$BASE16_SHELL/profile_helper.sh")"
 
-eval $(dircolors $ZFILES/solarized256.dircolors)
-export TERM=xterm-256color
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -33,14 +40,14 @@ zstyle ':completion:*' completer _expand _complete _correct _approximate
 #zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
 if whence dircolors >/dev/null; then
-#  eval "$(dircolors -b)"
+  eval "$(dircolors -b)"
   zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
   alias ls='ls --color'
 else
   export CLICOLOR=1
   zstyle ':completion:*:default' list-colors ''
 fi
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 #zstyle ':completion:*' list-colors ''
 #zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 #zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
@@ -65,6 +72,7 @@ source $ZFILES/zalias
 #source $ZFILES/zplug_lazy
 source $ZFILES/zinit
 
+eval $(dircolors $ZFILES/solarized256.dircolors)
 
 export DISPLAY=localhost:0.0
 export PATH="$PATH:/mnt/c/Program Files/win32yank-x64"
@@ -92,11 +100,7 @@ export PATH="$PATH:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/"
     exec tmux
 }
 
-#function select-history() {
-#  BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
-#  CURSOR=$#BUFFER
-#}
-#zle -N select-history
-#bindkey '^r' select-history
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

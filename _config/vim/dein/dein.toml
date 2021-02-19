@@ -77,6 +77,25 @@ hook_add='''
 [[plugins]]
 repo =  'scrooloose/syntastic'
 
+# go
+[[plugins]]
+repo = 'fatih/vim-go'
+hook_add='''
+  let g:go_term_enabled = 1
+  let g:go_term_mode = "split"
+  let g:go_highlight_types = 1
+  let g:go_highlight_fields = 1
+  let g:go_highlight_functions = 1
+  let g:go_highlight_function_calls = 1
+  let g:go_highlight_operators = 1
+  let g:go_highlight_extra_types = 1
+  let g:go_highlight_build_constraints = 1
+  let g:go_highlight_generate_tags = 1
+
+  let g:go_auto_type_info = 1
+  " let g:go_auto_sameids = 1
+'''
+
 # ヤンクしたとこが一瞬ハイライト
 [[plugins]]
 repo = 'haya14busa/vim-operator-flashy'
@@ -127,4 +146,7 @@ hook_add='''
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'fatih/molokai'
 #############################################

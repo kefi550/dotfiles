@@ -2,44 +2,77 @@
 repo = 'prabirshrestha/async.vim'
 
 [[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
-on_event=['InsertEnter']
-on_ft = ['sh', 'autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+repo = 'prabirshrestha/vim-lsp'
 hook_add = '''
-let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_popup_delay = 0
-let g:asyncomplete_log_file = expand('~/asyncomplete.log')
-" let g:asyncomplete_enable_for_all = 0
-" autocmd vimrc FileType autohotkey,autoit,cfg,git,go,groovy,java,javascript,python,snippet,toml,vim,vb,xsl call asyncomplete#enable_for_buffer()"
-imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-y>" : "\<CR>"
-imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : pumvisible() ? "\<C-y>" : "\<CR>"
+  let g:lsp_diagnostics_enabled = 1
+  let g:lsp_diagnostics_echo_cursor = 1
+  
+  " debug
+  " let g:lsp_log_verbose = 1
+  let g:lsp_log_file = expand('~/vim-lsp.log')
+  let g:lsp_async_completion = 1
+  
+  " let g:lsp_preview_max_height = 1
+  " let g:lsp_preview_max_width = 1
+  " let g:lsp_signature_help_enabled = 0
+  
+  let g:lsp_text_edit_enabled = 1
+  
+  " " python
+  " if executable('/home/kefi/.local/share/vim-lsp-settings/servers/pyls/pyls-all')
+  "   augroup LspPython
+  "     au!
+  "     au User lsp_setup call lsp#register_server({
+  "       \ 'name': 'pyls',
+  "       \ 'cmd': {server_info->['/home/kefi/.local/share/vim-lsp-settings/servers/pyls/pyls-all']},
+  "       \ 'whitelist': ['python'],
+  "       \ })
+  "   augroup end
+  " endif
+  
+  " autocmd FileType python setlocal omnifunc=lsp#complete
+  
+  function SetLSPShortcuts()
+    nnoremap <leader>ld :<C-u>LspDefinition<CR>
+  endfunction()
+  
+  augroup LSP
+    autocmd!
+    autocmd FileType python call SetLSPShortcuts()
+  augroup END
 '''
 
-#[[plugins]]
-#repo = 'prabirshrestha/asyncomplete-buffer.vim'
-#on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
-#hook_source = '''
-#autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-#  \ 'name': 'buffer',
-#  \ 'priority': 5,
-#  \ 'whitelist': ['*'],
-#  \ 'completor': function('asyncomplete#sources#buffer#completor'),
-#\ }))
-#'''
-
 [[plugins]]
-repo = 'prabirshrestha/asyncomplete-file.vim'
-depends = ['asyncomplete.vim']
-hook_source = '''
-  augroup vimrc
-    autocmd!
-  augroup END
-  autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-    \ 'name': 'file',
-    \ 'whitelist': ['*'],
-    \ 'priority': 10,
-    \ 'completor': function('asyncomplete#sources#file#completor')
-    \ }))
+repo = 'prabirshrestha/asyncomplete.vim'
+#on_event=['InsertEnter']
+#on_ft = ['sh', 'autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+hook_add = '''
+  let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+  let g:lsp_highlight_references_enabled = 1
+  let g:lsp_highlights_enabled = 1
+  let g:lsp_diagnostics_enabled = 1
+  let g:lsp_async_completion = 1
+  let g:lsp_auto_enable = 1
+  let g:lsp_preview_autoclose = 0
+  let g:lsp_preview_keep_focus = 0
+  let g:lsp_preview_doubletap = 0
+  let g:lsp_insert_text_enabled = 0
+  let g:lsp_text_edit_enabled = 0
+  let g:lsp_diagnostics_echo_cursor = 1
+  let g:lsp_virtual_text_enabled = 0
+  let g:lsp_textprop_enabled = 0
+  let g:lsp_signature_help_enabled = 0
+  let g:lsp_fold_enabled = 0
+  let g:asyncomplete_auto_popup = 1
+  let g:asyncomplete_popup_delay = 0
+  let g:asyncomplete_auto_completeopt = 1
+  let g:asyncomplete_remove_duplicates = 1
+  let g:asyncomplete_smart_completion = 1
+  set completeopt-=preview
+  " let g:asyncomplete_enable_for_all = 0
+  " autocmd vimrc FileType autohotkey,autoit,cfg,git,go,groovy,java,javascript,python,snippet,toml,vim,vb,xsl call asyncomplete#enable_for_buffer()"
+  imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-y>" : "\<CR>"
+  imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : pumvisible() ? "\<C-y>" : "\<CR>"
 '''
 
 [[plugins]]
@@ -48,22 +81,112 @@ on_ft = ['python', 'go']
 depends = ['asyncomplete.vim', 'vim-lsp']
 
 [[plugins]]
-repo = 'Shougo/echodoc.vim'
-hook_add= '''
-  let g:echodoc#enable_at_startup=1
-  let g:echodoc#type = 'signature'
+repo = 'prabirshrestha/asyncomplete-buffer.vim'
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+hook_source = '''
+  call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'priority': 5,
+    \ 'whitelist': ['*'],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
+  \ }))
 '''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-file.vim'
+depends = ['asyncomplete.vim']
+hook_source = '''
+  call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    \ 'name': 'file',
+    \ 'whitelist': ['*'],
+    \ 'priority': 10,
+    \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
+'''
+
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
 depends = ['neosnippet.vim']
 hook_source = '''
-  autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+  function! Ns_completor(opt, ctx) abort
+    let l:snips = values(neosnippet#helpers#get_completion_snippets())
+
+    let l:matches = []
+
+    let l:col = a:ctx['col']
+    let l:typed = a:ctx['typed']
+
+    let l:kw = matchstr(l:typed, '\w\+$')
+    let l:kwlen = len(l:kw)
+
+    " let l:matches = map(l:snips,'{"word":v:val["word"],"dup":1,"icase":1,"menu": "[snip] " . v:val["menu_abbr"]}')
+    let l:matches = map(l:snips,'{"word":v:val["word"],"dup":1,"icase":1,"kind":"snip","menu": v:val["menu_abbr"]}')
+    let l:startcol = l:col - l:kwlen
+
+    " .のとき無視
+    " if l:kw == ""
+    "   let g:snips = l:snips
+    " else
+    "   call asyncomplete#complete(a:opt['name'], a:ctx, l:startcol, l:matches)
+    " endif
+    call asyncomplete#complete(a:opt['name'], a:ctx, l:startcol, l:matches)
+  endfunction
+
+  function! Asyncomplete_neosnippet_register_source() abort
+    call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
       \ 'name': 'neosnippet',
       \ 'whitelist': ['*'],
-      \ 'priority': 9,
-      \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
+      \ 'priority': 20,
+      \ 'completor': function('Ns_completor'),
       \ }))
+  endfunction
+
+  function! Asyncomplete_neosnippet_unregister_source() abort
+    call asyncomplete#unregister_source('neosnippet')
+  endfunction
+
+  function! Asyncomplete_toggle_neosnippet() abort
+    if match (asyncomplete#get_source_names(), "neosnippet") != -1
+      call Asyncomplete_neosnippet_unregister_source()
+    else
+      call Asyncomplete_neosnippet_register_source()
+    endif
+  endfunction
+
+  imap <C-l> <C-o>:call Asyncomplete_toggle_neosnippet()<CR>
+'''
+#\ 'completor': function('asyncomplete#sources#neosnippet#completor'),
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'     
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+depends = 'neosnippet-snippets'
+hook_source = '''
+  " <TAB>: completion.
+  " inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
+
+  " Plugin key-mappings.
+  imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  nmap <C-k> <Plug>(neosnippet_expand_or_jump)
+  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k> <Plug>(neosnippet_expand_target)
+
+  " SuperTab like snippets behavior.
+  " imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
+  " smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
+
+  let g:neosnippet#data_directory = expand('~/_vim/.neosnippet')
+
+  " Tell Neosnippet about the other snippets
+  " gosnippets は vim-go がうまいことやってくれるはずだけど、なんかうまくいかないので直接追加。
+  let g:neosnippet#snippets_directory = [
+      \   '~/vimfiles/snippets',
+      \   '~/_vim/dein/repos/github.com/honza/vim-snippets/snippets/',
+      \   '~/_vim/dein/repos/github.com/fatih/vim-go/gosnippets/snippets/',
+      \ ]
 '''
 
 #[[plugins]]
@@ -78,87 +201,18 @@ hook_source = '''
 #repo = 'roxma/nvim-yarp'
 #
 #[[plugins]]
-#repo = 'roxma/vim-hug-neovim-rpc'
-#
-#[[plugins]]
 #repo = 'Shougo/deoplete-vim-lsp'
 
-[[plugins]]
-repo = 'Shougo/neosnippet.vim'
-hook_source = '''
-  " <TAB>: completion.
-  inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
-
-  " Plugin key-mappings.
-  imap <C-k> <Plug>(neosnippet_expand_or_jump)
-  smap <C-k> <Plug>(neosnippet_expand_or_jump)
-
-  " SuperTab like snippets behavior.
-  imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
-  smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
-
-  let g:neosnippet#data_directory = expand('~/_vim/.neosnippet')
-
-  " Tell Neosnippet about the other snippets
-  " gosnippets は vim-go がうまいことやってくれるはずだけど、なんかうまくいかないので直接追加。
-  let g:neosnippet#snippets_directory = [
-        \   '~/vimfiles/snippets',
-        \   '~/_vim/dein/repos/github.com/honza/vim-snippets/snippets/',
-        \   '~/_vim/dein/repos/github.com/fatih/vim-go/gosnippets/snippets/',
-        \ ]
-'''
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'     
 
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
 
-#[[plugins]]
-#repo = 'mattn/vim-lsp-icons'
-#hook_post_source = '''
-#  let g:lsp_signs_warning.text = 'w'
-#'''
-
 [[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-hook_add = '''
-" lint 
-let g:lsp_diagnostics_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
-" debug
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('~/vim-lsp.log')
-let g:lsp_async_completion = 1
-
-" python
-if executable('/home/kefi/.local/share/vim-lsp-settings/servers/pyls/pyls-all')
-  augroup LspPython
-    au!
-    au User lsp_setup call lsp#register_server({
-      \ 'name': 'pyls',
-      \ 'cmd': {server_info->['/home/kefi/.local/share/vim-lsp-settings/servers/pyls/pyls-all']},
-      \ 'whitelist': ['python'],
-      \ })
-  augroup end
-endif
-
-autocmd FileType python setlocal omnifunc=lsp#complete
-
-function SetLSPShortcuts()
-  nnoremap <leader>ld :<C-u>LspDefinition<CR>
-endfunction()
-
-augroup LSP
-  autocmd!
-  autocmd FileType python call SetLSPShortcuts()
-augroup END
-
-" let g:lsp_preview_max_height = 1
-" let g:lsp_preview_max_width = 1
-" let g:lsp_signature_help_enabled = 0
+repo = 'Shougo/echodoc.vim'
+hook_add= '''
+  let g:echodoc#enable_at_startup=1
+  let g:echodoc#type = 'signature'
 '''
-
 
 ##############################################
 # コード補完

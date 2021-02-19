@@ -10,11 +10,8 @@ runtime! mapping.rc.vim
 " provider (python)
 " runtime! provider.vim
 
-" ファイルタイプ
+" ファイルタイプごとの設定
 runtime! ft.vim
-
-" インデント
-runtime! indent_ft.vim
 
 " python
 runtime! python.vim
@@ -25,5 +22,5 @@ runtime! dein/dein.rc.vim
 " オプション
 runtime! options.rc.vim
 
-autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
-let g:lsp_signs_warning = {'text': '💩'}
+let g:lsp_diagnostics_signs_warning = {'text': '💩'}
+let g:lsp_diagnostics_signs_error = {'text': '💩'}

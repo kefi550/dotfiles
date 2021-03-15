@@ -14,7 +14,7 @@ hook_add = '''
   
   " let g:lsp_preview_max_height = 1
   " let g:lsp_preview_max_width = 1
-  " let g:lsp_signature_help_enabled = 0
+  let g:lsp_signature_help_enabled = 1
   
   let g:lsp_text_edit_enabled = 1
   
@@ -61,8 +61,7 @@ hook_add = '''
   let g:lsp_diagnostics_echo_cursor = 1
   let g:lsp_virtual_text_enabled = 0
   let g:lsp_textprop_enabled = 0
-  let g:lsp_signature_help_enabled = 0
-  let g:lsp_fold_enabled = 0
+  let g:lsp_fold_enabled = 1
   let g:asyncomplete_auto_popup = 1
   let g:asyncomplete_popup_delay = 0
   let g:asyncomplete_auto_completeopt = 1
@@ -154,7 +153,9 @@ hook_source = '''
     endif
   endfunction
 
-  imap <C-l> <C-o>:call Asyncomplete_toggle_neosnippet()<CR>
+  inoremap <C-l> <C-o>:call Asyncomplete_toggle_neosnippet()<CR>
+  cnoremap <C-l> :call Asyncomplete_toggle_neosnippet()<CR>
+  nnoremap <C-l> :call Asyncomplete_toggle_neosnippet()<CR>
 '''
 #\ 'completor': function('asyncomplete#sources#neosnippet#completor'),
 

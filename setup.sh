@@ -2,6 +2,7 @@
 
 DOTFILE_DIR=$(pwd)
 
+ln -snfv $DOTFILE_DIR/_config/zsh/p10k.zsh ~/.p10k.zsh
 ln -snfv $DOTFILE_DIR/_zshrc ~/.zshrc
 
 ln -snfv $DOTFILE_DIR/_config ~/.config

@@ -33,7 +33,6 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
       eval "$("$BASE16_SHELL/profile_helper.sh")"
 
-
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 #zstyle ':completion:*' format 'Completing %d'
@@ -77,11 +76,11 @@ eval $(dircolors $ZFILES/solarized256.dircolors)
 export DISPLAY=localhost:0.0
 export PATH="$PATH:/mnt/c/Program Files/win32yank-x64"
 
-export VAGRANT_WSL_WINDOWS_ACCESS_USER="ishibashi"
-export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
-export VAGRANT_WSL_WINDOWS_ACCESS_USER_HOME_PATH="/mnt/c/vagrant"
-export PATH="$PATH:/mnt/c/Windows/System32/"
-export PATH="$PATH:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/"
+#export VAGRANT_WSL_WINDOWS_ACCESS_USER="ishibashi"
+#export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
+#export VAGRANT_WSL_WINDOWS_ACCESS_USER_HOME_PATH="/mnt/c/vagrant"
+#export PATH="$PATH:/mnt/c/Windows/System32/"
+#export PATH="$PATH:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/"
 #export PATH="$PATH:/mnt/c/HashiCorp/Vagrant/wslbin"
 
 #if type zprof > /dev/null 2>&1; then
@@ -102,5 +101,8 @@ export PATH="$PATH:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+export PATH="$HOME/.poetry/bin:$PATH"
+export AWS_VAULT_BACKEND="file"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f $ZFILES/p10k.zsh ]] || source $ZFILES/p10k.zsh
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

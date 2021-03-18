@@ -27,11 +27,12 @@ SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
 
-# 色読み込み
+# 色
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
       eval "$("$BASE16_SHELL/profile_helper.sh")"
+base16_google-dark
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -71,17 +72,8 @@ source $ZFILES/zalias
 #source $ZFILES/zplug_lazy
 source $ZFILES/zinit
 
-eval $(dircolors $ZFILES/solarized256.dircolors)
-
 export DISPLAY=localhost:0.0
 export PATH="$PATH:/mnt/c/Program Files/win32yank-x64"
-
-#export VAGRANT_WSL_WINDOWS_ACCESS_USER="ishibashi"
-#export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
-#export VAGRANT_WSL_WINDOWS_ACCESS_USER_HOME_PATH="/mnt/c/vagrant"
-#export PATH="$PATH:/mnt/c/Windows/System32/"
-#export PATH="$PATH:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/"
-#export PATH="$PATH:/mnt/c/HashiCorp/Vagrant/wslbin"
 
 #if type zprof > /dev/null 2>&1; then
 #  zprof | less

@@ -5,24 +5,24 @@ autoload -Uz _zinit
 zinit load mafredri/zsh-async
 
 # p10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+zinit load romkatv/powerlevel10k
 
-zinit ice wait'!1'; zinit load chrissicool/zsh-256color
-zinit ice wait'!1'; zinit load b4b4r07/enhancd
+zinit ice wait'!0'; zinit light chrissicool/zsh-256color
+zinit ice wait'!0'; zinit light b4b4r07/enhancd
 
 #### タイプ補完
-zinit ice wait'!1'; zinit load zsh-users/zsh-autosuggestions
-zinit ice wait'!1'; zinit load zsh-users/zsh-completions
+zinit ice wait'!0'; zinit light zsh-users/zsh-autosuggestions
+zinit ice wait'!0'; zinit light zsh-users/zsh-completions
 
 ## history関係
-zinit ice wait'!2'; zinit load zsh-users/zsh-history-substring-search
+zinit ice wait'!0'; zinit light zsh-users/zsh-history-substring-search
 
 # 構文のハイライト(https://github.com/zsh-users/zsh-syntax-highlighting)
-#zinit ice wait'!2'; zinit load zsh-users/zsh-syntax-highlighting
-zinit ice wait'!2'; zinit load  zdharma/fast-syntax-highlighting
+#zinit ice wait'!0'; zinit load zsh-users/zsh-syntax-highlighting
+zinit ice wait'!0'; zinit light  zdharma/fast-syntax-highlighting
 
 ### emoji
-zinit ice wait'!2'; zinit load b4b4r07/emoji-cli
+zinit ice wait'!0'; zinit load b4b4r07/emoji-cli
 
 autoload -Uz compinit
 compinit
@@ -39,10 +39,6 @@ if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
-
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)

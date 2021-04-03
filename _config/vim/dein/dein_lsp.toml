@@ -76,7 +76,7 @@ hook_add = '''
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
-on_ft = ['python', 'go']
+on_ft = ['python', 'go', 'sh']
 depends = ['asyncomplete.vim', 'vim-lsp']
 
 [[plugins]]

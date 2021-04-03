@@ -1,3 +1,4 @@
+vim 8.2.2630
 kubectl 1.16.10
 kubectx 0.9.0
 stern 1.11.0
@@ -7,4 +8,13 @@ fzf 0.23.1
 neovim 0.4.4
 yq 3.4.0
 yarn 1.22.10
-golang 1.15.3
+golang 1.15.7
+docker-compose 1.28.5
+ripgrep 12.1.1
+bat 0.18.0
+nodejs 15.12.0
+awscli 2.1.31
+tmux 3.1c
+python 3.8.8
+awscli 2.1.31
+aws-vault 6.3.0

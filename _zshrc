@@ -11,7 +11,7 @@ export ZFILES=~/.config/zsh
 export TERM=xterm-256color
 
 # prompt
-source $ZFILES/zprompt
+#source $ZFILES/zprompt
 
 ######################################
 setopt histignorealldups sharehistory
@@ -92,6 +92,11 @@ export PATH="$PATH:/mnt/c/Program Files/win32yank-x64"
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# completion
+eval "$(aws-vault --completion-script-zsh)"
+source <(kubectl completion zsh)
+source "${HOME}/.asdf/installs/awscli/2.1.31/bin/aws_zsh_completer.sh"
 
 export PATH="$HOME/.poetry/bin:$PATH"
 export AWS_VAULT_BACKEND="file"

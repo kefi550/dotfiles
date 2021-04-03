@@ -24,3 +24,19 @@ runtime! options.rc.vim
 
 let g:lsp_diagnostics_signs_warning = {'text': '💩'}
 let g:lsp_diagnostics_signs_error = {'text': '💩'}
+
+let g:quickrun_config = {
+\    'json': {
+\        'outputter/buffer/filetype': 'json',
+\        'command': 'jq',
+\        'cmdopt': '.',
+\        'exec': 'cat %s | sed -z "s/\n//g" | %c %o',
+\    }
+\}
+
+if system('uname -a | grep microsoft') != ''
+   augroup myYank
+     autocmd!
+     autocmd TextYankPost * :call system('clip.exe', @")
+   augroup END
+endif")

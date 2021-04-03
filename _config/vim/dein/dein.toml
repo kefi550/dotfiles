@@ -84,6 +84,9 @@ hook_add='''
 [[plugins]]
 repo =  'scrooloose/syntastic'
 
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
+
 ## go
 #[[plugins]]
 #repo = 'fatih/vim-go'

@@ -5,7 +5,9 @@ DOTFILE_DIR=$(pwd)
 ln -snfv $DOTFILE_DIR/_config/zsh/p10k.zsh ~/.p10k.zsh
 ln -snfv $DOTFILE_DIR/_zshrc ~/.zshrc
 
-ln -snfv $DOTFILE_DIR/_config ~/.config
+ln -snfv $DOTFILE_DIR/_config/vim ~/.config/
+ln -snfv $DOTFILE_DIR/_config/zsh ~/.config/
+ln -snfv $DOTFILE_DIR/_config/base16-shell ~/.config/
 ln -snfv $DOTFILE_DIR/_tmux.conf ~/.tmux.conf
 ln -snfv $DOTFILE_DIR/_gitconfig ~/.gitconfig
 ln -snfv $DOTFILE_DIR/_textlintrc ~/.textlintrc

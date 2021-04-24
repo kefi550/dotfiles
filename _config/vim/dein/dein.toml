@@ -42,6 +42,9 @@ hook_add = '''
 '''
 
 
+[[plugins]]
+repo = 'tpope/vim-surround'
+
 #ディレクトリ表示
 #[[plugins]]
 #repo = 'Shougo/vimfiler'

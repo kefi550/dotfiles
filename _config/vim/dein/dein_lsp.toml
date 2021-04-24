@@ -9,7 +9,7 @@ hook_add = '''
   
   " debug
   " let g:lsp_log_verbose = 1
-  let g:lsp_log_file = expand('~/vim-lsp.log')
+  " let g:lsp_log_file = expand('~/vim-lsp.log')
   let g:lsp_async_completion = 1
   
   " let g:lsp_preview_max_height = 1
@@ -47,7 +47,7 @@ repo = 'prabirshrestha/asyncomplete.vim'
 #on_event=['InsertEnter']
 #on_ft = ['sh', 'autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
 hook_add = '''
-  let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+  " let g:asyncomplete_log_file = expand('~/asyncomplete.log')
   let g:lsp_highlight_references_enabled = 1
   let g:lsp_highlights_enabled = 1
   let g:lsp_diagnostics_enabled = 1

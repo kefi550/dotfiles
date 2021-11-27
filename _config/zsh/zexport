@@ -9,11 +9,10 @@ export XDG_CACHE_HOME=~/.cache
 #export VAGRANT_WSL_WINDOWS_ACCESS_USER=ishibashi
 
 ## golang
-if which go &> /dev/null; then
-  export GOPATH=$HOME/go
-  export PATH=$PATH:/usr/local/go/bin
-  export PATH=$PATH:$GOPATH/bin
-fi
+# export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go/bin
+export PATH=$PATH:$GOPATH/bin
+export GO111MODULE=on
 
 ## python
 #PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
@@ -47,6 +46,10 @@ if [ -d /home/linuxbrew/.linuxbrew ] ; then
   #umask 002
 fi
 
+## volta
+export VOLTA_HOME=$HOME/.volta
+export PATH="$VOLTA_HOME/bin:$PATH"
+
 # asdf
 if [ -d $HOME/.asdf ]; then
   . $HOME/.asdf/asdf.sh
@@ -60,3 +63,4 @@ fi
 
 ## docker
 export DOCKER_BUILDKIT=1
+

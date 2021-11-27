@@ -40,3 +40,9 @@ if system('uname -a | grep microsoft') != ''
      autocmd TextYankPost * :call system('clip.exe', @")
    augroup END
 endif")
+if system('uname -a | grep Linux | grep -v microsoft') != ''
+   augroup myYank
+     autocmd!
+     autocmd TextYankPost * :call system('xclip -selection c', @")
+   augroup END
+endif")

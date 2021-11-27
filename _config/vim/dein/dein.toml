@@ -4,18 +4,6 @@ repo = 'Shougo/dein.vim'
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
 build = 'make'
-#hook_post_update = '''
-#  if dein#util#_is_windows()
-#    let cmd = 'tools\\update-dll-mingw'
-#  elseif dein#util#_is_cygwin()
-#    let cmd = 'make -f make_cygwin.mak'
-#  elseif executable('gmake')
-#    let cmd = 'gmake'
-#  else
-#    let cmd = 'make'
-#  endif
-#  let g:dein#plugin.build = cmd
-#'''
 
 [[plugins]]
 repo = 'Shougo/unite.vim'
@@ -90,27 +78,12 @@ repo =  'scrooloose/syntastic'
 [[plugins]]
 repo = 'editorconfig/editorconfig-vim'
 
-## go
-#[[plugins]]
-#repo = 'fatih/vim-go'
-#hook_add='''
-#  let g:go_term_enabled = 1
-#  let g:go_term_mode = "split"
-#  let g:go_highlight_types = 1
-#  let g:go_highlight_fields = 1
-#  let g:go_highlight_functions = 1
-#  let g:go_highlight_function_calls = 1
-#  let g:go_highlight_operators = 1
-#  let g:go_highlight_extra_types = 1
-#  let g:go_highlight_build_constraints = 1
-#  let g:go_highlight_generate_tags = 1
-#
-#  let g:go_auto_type_info = 1
-#  " let g:go_auto_sameids = 1
-#'''
-
 [[plugins]]
 repo = 'mattn/vim-goimports'
+hook_add=''' 
+  let g:goimports = 1
+  let g:goimports_simplify = 1
+'''
 
 [[plugins]]
 repo = 'mattn/vim-gorun'
@@ -133,27 +106,8 @@ build = './install --all'
 [[plugins]]
 repo = 'junegunn/fzf.vim'
 
-#[[plugins]]
-#repo = 'w0rp/ale'
-#hook_add='''
-#let g:ale_linters = {
-#\  'markdown': ['textlint'],
-#\ }
-#" let g:ale_completion_enabled = 1
-#let g:ale_enabled = 1
-#'''
-
-##############################################
-
-## 色
-#[[plugins]]
-#repo = 'itchyny/lightline.vim'
-#hook_post_update = '''
-#  source ~/.config/vim/nvim/plugins/lightline.vim
-#'''
-
-#[[plugins]]
-#repo = 'ujihisa/unite-colorscheme'
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
@@ -171,4 +125,194 @@ repo = 'ryanoasis/vim-devicons'
 
 [[plugins]]
 repo = 'fatih/molokai'
-#############################################
+
+### LSP
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+hook_add = '''
+  let g:lsp_diagnostics_enabled = 1
+  let g:lsp_diagnostics_echo_cursor = 1
+  
+  " debug
+  " let g:lsp_log_verbose = 1
+  " let g:lsp_log_file = expand('~/vim-lsp.log')
+  let g:lsp_async_completion = 1
+  
+  " let g:lsp_preview_max_height = 1
+  " let g:lsp_preview_max_width = 1
+  let g:lsp_signature_help_enabled = 1
+  
+  let g:lsp_text_edit_enabled = 1
+
+  function SetLSPShortcuts()
+    nnoremap <leader>ld :<C-u>LspDefinition<CR>
+    " nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
+    " nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
+    " nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
+    " nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
+    " nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
+    " nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
+    " nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
+    " nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
+    " nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
+  endfunction()
+  
+  augroup LSP
+    autocmd!
+    autocmd FileType python call SetLSPShortcuts()
+  augroup END
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+#on_event=['InsertEnter']
+on_ft = ['sh', 'autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+hook_add = '''
+  " let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+  let g:lsp_highlight_references_enabled = 1
+  let g:lsp_highlights_enabled = 1
+  let g:lsp_diagnostics_enabled = 1
+  let g:lsp_async_completion = 1
+  let g:lsp_auto_enable = 1
+  let g:lsp_preview_autoclose = 0
+  let g:lsp_preview_keep_focus = 0
+  let g:lsp_preview_doubletap = 0
+  let g:lsp_insert_text_enabled = 0
+  let g:lsp_text_edit_enabled = 0
+  let g:lsp_diagnostics_echo_cursor = 1
+  let g:lsp_virtual_text_enabled = 0
+  let g:lsp_textprop_enabled = 0
+  let g:lsp_fold_enabled = 1
+  let g:asyncomplete_auto_popup = 1
+  let g:asyncomplete_popup_delay = 0
+  let g:asyncomplete_auto_completeopt = 1
+  let g:asyncomplete_remove_duplicates = 1
+  let g:asyncomplete_smart_completion = 1
+  set completeopt-=preview
+  " let g:asyncomplete_enable_for_all = 0
+  " autocmd vimrc FileType autohotkey,autoit,cfg,git,go,groovy,java,javascript,python,snippet,toml,vim,vb,xsl call asyncomplete#enable_for_buffer()"
+  imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-y>" : "\<CR>"
+  imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : pumvisible() ? "\<C-y>" : "\<CR>"
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+on_ft = ['python', 'go', 'sh']
+depends = ['asyncomplete.vim', 'vim-lsp']
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-buffer.vim'
+# on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'sh', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+hook_add = '''
+  call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'priority': 5,
+    \ 'whitelist': ['*'],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
+  \ }))
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-file.vim'
+depends = ['asyncomplete.vim']
+hook_add = '''
+  call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    \ 'name': 'file',
+    \ 'whitelist': ['*'],
+    \ 'priority': 10,
+    \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
+'''
+
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
+depends = ['neosnippet.vim']
+hook_add = '''
+  function! Ns_completor(opt, ctx) abort
+    let l:snips = values(neosnippet#helpers#get_completion_snippets())
+
+    let l:matches = []
+
+    let l:col = a:ctx['col']
+    let l:typed = a:ctx['typed']
+
+    let l:kw = matchstr(l:typed, '\w\+$')
+    let l:kwlen = len(l:kw)
+
+    " let l:matches = map(l:snips,'{"word":v:val["word"],"dup":1,"icase":1,"menu": "[snip] " . v:val["menu_abbr"]}')
+    let l:matches = map(l:snips,'{"word":v:val["word"],"dup":1,"icase":1,"kind":"snip","menu": v:val["menu_abbr"]}')
+    let l:startcol = l:col - l:kwlen
+
+    call asyncomplete#complete(a:opt['name'], a:ctx, l:startcol, l:matches)
+  endfunction
+
+  function! Asyncomplete_neosnippet_register_source() abort
+    call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+      \ 'name': 'neosnippet',
+      \ 'whitelist': ['*'],
+      \ 'priority': 20,
+      \ 'completor': function('Ns_completor'),
+      \ }))
+  endfunction
+
+  function! Asyncomplete_neosnippet_unregister_source() abort
+    call asyncomplete#unregister_source('neosnippet')
+  endfunction
+
+  function! Asyncomplete_toggle_neosnippet() abort
+    if match (asyncomplete#get_source_names(), "neosnippet") != -1
+      call Asyncomplete_neosnippet_unregister_source()
+    else
+      call Asyncomplete_neosnippet_register_source()
+    endif
+  endfunction
+
+  inoremap <C-l> <C-o>:call Asyncomplete_toggle_neosnippet()<CR>
+  cnoremap <C-l> :call Asyncomplete_toggle_neosnippet()<CR>
+  nnoremap <C-l> :call Asyncomplete_toggle_neosnippet()<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'     
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+depends = 'neosnippet-snippets'
+hook_add = '''
+  " <TAB>: completion.
+  " inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
+
+  " Plugin key-mappings.
+  imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  nmap <C-k> <Plug>(neosnippet_expand_or_jump)
+  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k> <Plug>(neosnippet_expand_target)
+
+  " SuperTab like snippets behavior.
+  " imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
+  " smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
+
+  let g:neosnippet#data_directory = expand('~/_vim/.neosnippet')
+
+  " Tell Neosnippet about the other snippets
+  " gosnippets は vim-go がうまいことやってくれるはずだけど、なんかうまくいかないので直接追加。
+  let g:neosnippet#snippets_directory = [
+      \   '~/vimfiles/snippets',
+      \   '~/_vim/dein/repos/github.com/honza/vim-snippets/snippets/',
+      \   '~/_vim/dein/repos/github.com/fatih/vim-go/gosnippets/snippets/',
+      \ ]
+'''
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+
+[[plugins]]
+repo = 'Shougo/echodoc.vim'
+hook_add= '''
+  let g:echodoc#enable_at_startup=1
+  let g:echodoc#type = 'signature'
+'''

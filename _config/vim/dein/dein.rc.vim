@@ -19,12 +19,10 @@ if dein#load_state(s:dein_dir)
 
   let g:dein_rc_dir    = expand("~/.config/vim/dein")
   let s:toml      = g:dein_rc_dir . '/dein.toml'
-  let s:lsp_toml      = g:dein_rc_dir . '/dein_lsp.toml'
   let s:lazy_toml = g:dein_rc_dir . '/dein_lazy.toml'
 
   " TOML を読み込み、キャッシュしておく
   call dein#load_toml(s:toml, {'lazy': 0})
-  call dein#load_toml(s:lsp_toml, {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
   call dein#end()

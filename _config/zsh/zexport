@@ -10,7 +10,7 @@ export XDG_CACHE_HOME=~/.cache
 
 ## golang
 # export PATH=$PATH:/usr/local/go/bin
-export GOPATH=$HOME/go/bin
+export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export GO111MODULE=on
 
@@ -64,3 +64,8 @@ fi
 ## docker
 export DOCKER_BUILDKIT=1
 
+## ghq
+$ gcd() {
+  declare -r REPO_NAME="$(ghq list >/dev/null | fzf-tmux --reverse +m)"
+  [[ -n "${REPO_NAME}" ]] && cd "$(ghq root)/${REPO_NAME}"
+}

@@ -18,6 +18,28 @@ hook_post_update = '''
 '''
 
 [[plugins]]
+repo = 'scrooloose/nerdtree'
+
+# カッコ補完
+[[plugins]]
+repo = 'Townk/vim-autoclose'
+
+# airline
+######################################################################
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add='''
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#formatter = 'default'
+  let g:airline_theme='molokai'
+  " let g:airline_theme='solarized_flood'
+'''
+######################################################################
+
+[[plugins]]
 repo = 'junegunn/vim-emoji'
 hook_post_source = '''
   set completefunc=emoji#complete
@@ -29,40 +51,11 @@ hook_add = '''
   let g:cheatsheet#cheat_file = '~/.config/vim/ovim/cheetsheet.md'
 '''
 
-
 [[plugins]]
 repo = 'tpope/vim-surround'
 
-#ディレクトリ表示
-#[[plugins]]
-#repo = 'Shougo/vimfiler'
-#hook_add = '''
-#  " Use vimfiler instead of default filer.
-#  let g:vimfiler_as_default_explorer = 1
-#  " Open filer
-#  noremap <silent> :tree :VimFiler -split -simple -winwidth=30 -no-quit
-#  nnoremap <silent> <Leader>fi :<C-u>VimFilerBufferDir -split -simple -winwidth=24 -no-quit<ENTER>
-#  nnoremap <silent> <Leader>fi :<C-u>VimFiler -split -simple -winwidth=24 -no-quit<ENTER>
-#  " noremap <C-X><C-T> :VimFiler -split -simple -winwidth=30 -no-quit<ENTER>
-#  " Don't let <CR> enter the directory but let it open the directory
-#  autocmd FileType vimfiler nmap <buffer> <CR> <Plug>(vimfiler_expand_or_edit)
-#  " Automatically open vimfiler on start
-#  " autocmd VimEnter * VimFiler -split -simple -winwidth=29 -no-quit
-#'''
-
-# ディレクトリ表示
-[[plugins]]
-repo = 'scrooloose/nerdtree'
-
-[[plugins]]
-repo = 'Shougo/vimshell'
-
 [[plugins]]
 repo = 'kana/vim-operator-user'
-
-# カッコ補完
-[[plugins]]
-repo = 'Townk/vim-autoclose'
 
 # yamlインデント
 [[plugins]]
@@ -70,6 +63,9 @@ repo = 'chase/vim-ansible-yaml'
 hook_add='''
   let g:ansible_options = {'ignore_blank_lines': 0}
 '''
+
+[[plugins]]
+repo = 'hashivim/vim-terraform'
 
 # syntax check
 [[plugins]]
@@ -110,21 +106,14 @@ repo = 'junegunn/fzf.vim'
 repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
-repo = 'vim-airline/vim-airline-themes'
-
-[[plugins]]
-repo = 'vim-airline/vim-airline'
-hook_add='''
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#formatter = 'default'
-  let g:airline_theme='molokai'
-'''
-
-[[plugins]]
 repo = 'ryanoasis/vim-devicons'
 
 [[plugins]]
-repo = 'fatih/molokai'
+repo = 'Shougo/echodoc.vim'
+hook_add= '''
+  let g:echodoc#enable_at_startup=1
+  let g:echodoc#type = 'signature'
+'''
 
 ### LSP
 [[plugins]]
@@ -167,9 +156,12 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'mattn/vim-lsp-settings'
+
+[[plugins]]
 repo = 'prabirshrestha/asyncomplete.vim'
 #on_event=['InsertEnter']
-on_ft = ['sh', 'autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+on_ft = ['sh', 'autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'terraform', 'tf', 'toml', 'vim', 'vb', 'xsl', 'html']
 hook_add = '''
   " let g:asyncomplete_log_file = expand('~/asyncomplete.log')
   let g:lsp_highlight_references_enabled = 1
@@ -191,21 +183,21 @@ hook_add = '''
   let g:asyncomplete_auto_completeopt = 1
   let g:asyncomplete_remove_duplicates = 1
   let g:asyncomplete_smart_completion = 1
-  set completeopt-=preview
+  " set completeopt-=preview
+  set completeopt=menuone
   " let g:asyncomplete_enable_for_all = 0
   " autocmd vimrc FileType autohotkey,autoit,cfg,git,go,groovy,java,javascript,python,snippet,toml,vim,vb,xsl call asyncomplete#enable_for_buffer()"
-  imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-y>" : "\<CR>"
-  imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : pumvisible() ? "\<C-y>" : "\<CR>"
 '''
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
-on_ft = ['python', 'go', 'sh']
+on_ft = ['python', 'go', 'sh', 'html', 'terraform', 'tf']
 depends = ['asyncomplete.vim', 'vim-lsp']
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-buffer.vim'
 # on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'sh', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+depends = ['asyncomplete.vim']
 hook_add = '''
   call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
     \ 'name': 'buffer',
@@ -227,92 +219,110 @@ hook_add = '''
     \ }))
 '''
 
+# [[plugins]]
+# repo = 'Shougo/neosnippet-snippets'     
+# 
+# [[plugins]]
+# repo = 'Shougo/neosnippet.vim'
+# depends = 'neosnippet-snippets'
+# hook_add = '''
+#   " <TAB>: completion.
+#   " inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
+# 
+#   " Plugin key-mappings.
+#   imap <C-k> <Plug>(neosnippet_expand_or_jump)
+#   nmap <C-k> <Plug>(neosnippet_expand_or_jump)
+#   smap <C-k> <Plug>(neosnippet_expand_or_jump)
+#   xmap <C-k> <Plug>(neosnippet_expand_target)
+#   imap <C-s> <Plug>(neosnippet_expand_or_jump)
+#   nmap <C-s> <Plug>(neosnippet_expand_or_jump)
+#   smap <C-s> <Plug>(neosnippet_expand_or_jump)
+#   xmap <C-s> <Plug>(neosnippet_expand_target)
+# 
+#   " SuperTab like snippets behavior.
+#   " imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
+#   " smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
+# 
+#   let g:neosnippet#data_directory = expand('~/_vim/.neosnippet')
+# 
+#   " Tell Neosnippet about the other snippets
+#   " gosnippets は vim-go がうまいことやってくれるはずだけど、なんかうまくいかないので直接追加。
+#   let g:neosnippet#snippets_directory = [
+#       \   '~/vimfiles/snippets',
+#       \   '~/_vim/dein/repos/github.com/honza/vim-snippets/snippets/',
+#       \   '~/_vim/dein/repos/github.com/fatih/vim-go/gosnippets/snippets/',
+#       \ ]
+#   " imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-y>" : "\<CR>"
+#   " imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : pumvisible() ? "\<C-y>" : "\<CR>"
+# '''
+# 
+# [[plugins]]
+# repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
+# depends = ['neosnippet.vim']
+# hook_add = '''
+#   function! Ns_completor(opt, ctx) abort
+#     let l:snips = values(neosnippet#helpers#get_completion_snippets())
+# 
+#     let l:matches = []
+# 
+#     let l:col = a:ctx['col']
+#     let l:typed = a:ctx['typed']
+# 
+#     let l:kw = matchstr(l:typed, '\w\+$')
+#     let l:kwlen = len(l:kw)
+# 
+#     " let l:matches = map(l:snips,'{"word":v:val["word"],"dup":1,"icase":1,"menu": "[snip] " . v:val["menu_abbr"]}')
+#     let l:matches = map(l:snips,'{"word":v:val["word"],"dup":1,"icase":1,"kind":"snip","menu": v:val["menu_abbr"]}')
+#     let l:startcol = l:col - l:kwlen
+# 
+#     call asyncomplete#complete(a:opt['name'], a:ctx, l:startcol, l:matches)
+#   endfunction
+# 
+#   function! Asyncomplete_neosnippet_register_source() abort
+#     call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+#       \ 'name': 'neosnippet',
+#       \ 'whitelist': ['*'],
+#       \ 'priority': 20,
+#       \ 'completor': function('Ns_completor'),
+#       \ }))
+#   endfunction
+# 
+#   function! Asyncomplete_neosnippet_unregister_source() abort
+#     call asyncomplete#unregister_source('neosnippet')
+#   endfunction
+# 
+#   function! Asyncomplete_toggle_neosnippet() abort
+#     if match (asyncomplete#get_source_names(), "neosnippet") != -1
+#       call Asyncomplete_neosnippet_unregister_source()
+#     else
+#       call Asyncomplete_neosnippet_register_source()
+#     endif
+#   endfunction
+# 
+#   inoremap <C-l> <C-o>:call Asyncomplete_toggle_neosnippet()<CR>
+#   cnoremap <C-l> :call Asyncomplete_toggle_neosnippet()<CR>
+#   nnoremap <C-l> :call Asyncomplete_toggle_neosnippet()<CR>
+# '''
 
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
-depends = ['neosnippet.vim']
-hook_add = '''
-  function! Ns_completor(opt, ctx) abort
-    let l:snips = values(neosnippet#helpers#get_completion_snippets())
+### #ディレクトリ表示
+### #[[plugins]]
+### #repo = 'Shougo/vimfiler'
+### #hook_add = '''
+### #  " Use vimfiler instead of default filer.
+### #  let g:vimfiler_as_default_explorer = 1
+### #  " Open filer
+### #  noremap <silent> :tree :VimFiler -split -simple -winwidth=30 -no-quit
+### #  nnoremap <silent> <Leader>fi :<C-u>VimFilerBufferDir -split -simple -winwidth=24 -no-quit<ENTER>
+### #  nnoremap <silent> <Leader>fi :<C-u>VimFiler -split -simple -winwidth=24 -no-quit<ENTER>
+### #  " noremap <C-X><C-T> :VimFiler -split -simple -winwidth=30 -no-quit<ENTER>
+### #  " Don't let <CR> enter the directory but let it open the directory
+### #  autocmd FileType vimfiler nmap <buffer> <CR> <Plug>(vimfiler_expand_or_edit)
+### #  " Automatically open vimfiler on start
+### #  " autocmd VimEnter * VimFiler -split -simple -winwidth=29 -no-quit
+### #'''
 
-    let l:matches = []
+### [[plugins]]
+### repo = 'Shougo/vimshell'
 
-    let l:col = a:ctx['col']
-    let l:typed = a:ctx['typed']
-
-    let l:kw = matchstr(l:typed, '\w\+$')
-    let l:kwlen = len(l:kw)
-
-    " let l:matches = map(l:snips,'{"word":v:val["word"],"dup":1,"icase":1,"menu": "[snip] " . v:val["menu_abbr"]}')
-    let l:matches = map(l:snips,'{"word":v:val["word"],"dup":1,"icase":1,"kind":"snip","menu": v:val["menu_abbr"]}')
-    let l:startcol = l:col - l:kwlen
-
-    call asyncomplete#complete(a:opt['name'], a:ctx, l:startcol, l:matches)
-  endfunction
-
-  function! Asyncomplete_neosnippet_register_source() abort
-    call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
-      \ 'name': 'neosnippet',
-      \ 'whitelist': ['*'],
-      \ 'priority': 20,
-      \ 'completor': function('Ns_completor'),
-      \ }))
-  endfunction
-
-  function! Asyncomplete_neosnippet_unregister_source() abort
-    call asyncomplete#unregister_source('neosnippet')
-  endfunction
-
-  function! Asyncomplete_toggle_neosnippet() abort
-    if match (asyncomplete#get_source_names(), "neosnippet") != -1
-      call Asyncomplete_neosnippet_unregister_source()
-    else
-      call Asyncomplete_neosnippet_register_source()
-    endif
-  endfunction
-
-  inoremap <C-l> <C-o>:call Asyncomplete_toggle_neosnippet()<CR>
-  cnoremap <C-l> :call Asyncomplete_toggle_neosnippet()<CR>
-  nnoremap <C-l> :call Asyncomplete_toggle_neosnippet()<CR>
-'''
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'     
-
-[[plugins]]
-repo = 'Shougo/neosnippet.vim'
-depends = 'neosnippet-snippets'
-hook_add = '''
-  " <TAB>: completion.
-  " inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
-
-  " Plugin key-mappings.
-  imap <C-k> <Plug>(neosnippet_expand_or_jump)
-  nmap <C-k> <Plug>(neosnippet_expand_or_jump)
-  smap <C-k> <Plug>(neosnippet_expand_or_jump)
-  xmap <C-k> <Plug>(neosnippet_expand_target)
-
-  " SuperTab like snippets behavior.
-  " imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
-  " smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
-
-  let g:neosnippet#data_directory = expand('~/_vim/.neosnippet')
-
-  " Tell Neosnippet about the other snippets
-  " gosnippets は vim-go がうまいことやってくれるはずだけど、なんかうまくいかないので直接追加。
-  let g:neosnippet#snippets_directory = [
-      \   '~/vimfiles/snippets',
-      \   '~/_vim/dein/repos/github.com/honza/vim-snippets/snippets/',
-      \   '~/_vim/dein/repos/github.com/fatih/vim-go/gosnippets/snippets/',
-      \ ]
-'''
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-
-[[plugins]]
-repo = 'Shougo/echodoc.vim'
-hook_add= '''
-  let g:echodoc#enable_at_startup=1
-  let g:echodoc#type = 'signature'
-'''
+### [[plugins]]
+### repo = 'fatih/molokai'

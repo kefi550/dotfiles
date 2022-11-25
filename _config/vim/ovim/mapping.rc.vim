@@ -3,7 +3,7 @@
 inoremap <silent> jj <ESC>
 inoremap <silent> <C-j> j
 inoremap <silent> kk <ESC>
-inoremap <silent> <C-k> k
+" inoremap <silent> <C-k> k
 
 "  " ctrl + hjklで画面移動
 " noremap <silent> <C-h> <C-w><C-h>

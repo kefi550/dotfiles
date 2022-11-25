@@ -43,6 +43,8 @@ set smartcase
 " 検索結果をハイライト"
 set hlsearch
 
+set re=0
+
 " 不可視文字を可視化(タブが「▸-」と表示される)
 set list listchars=tab:\▸\-
 

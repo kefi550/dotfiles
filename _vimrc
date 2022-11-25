@@ -34,12 +34,21 @@ let g:quickrun_config = {
 \    }
 \}
 
+" WSL
 if system('uname -a | grep microsoft') != ''
    augroup myYank
      autocmd!
      autocmd TextYankPost * :call system('clip.exe', @")
    augroup END
 endif")
+" Mac
+if system('uname -a | grep Darwin') != ''
+   augroup myYank
+     autocmd!
+     autocmd TextYankPost * :call system('pbcopy', @")
+   augroup END
+endif")
+" WSL以外
 if system('uname -a | grep Linux | grep -v microsoft') != ''
    augroup myYank
      autocmd!

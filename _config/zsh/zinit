@@ -1,4 +1,12 @@
-source $HOME/.zinit/bin/zinit.zsh
+case ${OSTYPE} in
+  # たぶんいみない
+  darwin*)
+    source $HOME/.local/share/zinit/zinit.git/zinit.zsh
+    ;;
+  *)
+    source $HOME/.zinit/bin/zinit.zsh
+    ;;
+esac
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 

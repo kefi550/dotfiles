@@ -4,7 +4,7 @@ DOTFILE_DIR=$(pwd)
 
 if [ "$(uname)" == 'Darwin' ]; then
   #mac
-  if !(type gln > /dev/null 2&>1); then
+  if !(type gln > /dev/null); then
     brew install coreutils
   fi
   LN=gln

@@ -89,3 +89,5 @@ fi
     tmux new-window -c "$PWD" 2>/dev/null && exec tmux a
     exec tmux
 }
+
+[[ -e $ZFILES/office.zsh ]] && source $ZFILES/office.zsh

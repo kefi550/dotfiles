@@ -1,5 +1,6 @@
-export DOTFILE_DIR=$HOME/dotfiles
+export TERM=xterm-256color
 
+export DOTFILE_DIR=$HOME/dotfiles
 export XDG_CONFIG_HOME=~/.config
 export XDG_CACHE_HOME=~/.cache
 
@@ -34,8 +35,8 @@ if [ -d $HOME/.poetry ]; then
   export PATH=$HOME/.poetry/bin:$PATH
 fi
 
+# pipenv
 export PIPENV_VENV_IN_PROJECT=1
-
 
 # brew for ubuntu
 if [ -d /home/linuxbrew/.linuxbrew ] ; then
@@ -61,11 +62,37 @@ if which yarn &> /dev/null ; then
   export PATH="$PATH:`yarn global bin`"
 fi
 
-## docker
+# aws-vault
+if [[ $(type aws-vault > /dev/null) ]]; then
+  eval "$(aws-vault --completion-script-zsh)"
+  export AWS_VAULT_BACKEND=pass
+  export AWS_VAULT_PASS_PREFIX=aws-vault
+fi
+
+# kubectl
+if [[ $(type kubectl > /dev/null) ]]; then
+  source <(kubectl completion zsh)
+fi
+
+# awscli
+## completion
+if [ -d $HOME/.asdf/installs/awscli ]; then
+  source "$(ls -d ${HOME}/.asdf/installs/awscli/* | sort | head -n1)/bin/aws_zsh_completer.sh"
+fi
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# p10k
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# terraform
+if [[ -f $HOME/.asdf/shims/terraform ]]; then
+  autoload -U +X bashcompinit && bashcompinit
+  complete -o nospace -C $HOME/.asdf/shims/terraform terraform
+fi
+
+# docker
 export DOCKER_BUILDKIT=1
 
-case ${OSTYPE} in
-  darwin*)
-    PATH=$(brew --prefix)/opt/findutils/libexec/gnubin:$PATH
-    ;;
-esac

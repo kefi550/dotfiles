@@ -5,10 +5,9 @@
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
 
-export ZFILES=~/.config/zsh
-#export ZPLUG_HOME=~/.zplug
-
-export TERM=xterm-256color
+export ZFILES=$HOME/.config/zsh
+source $ZFILES/zexport
+source $ZFILES/zalias
 
 # prompt
 #source $ZFILES/zprompt
@@ -25,7 +24,6 @@ bindkey -v
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
-
 
 # 色
 BASE16_SHELL="$HOME/.config/base16-shell/"
@@ -64,23 +62,22 @@ setopt print_eight_bit
 setopt nolistbeep
 setopt no_beep
 
-source $ZFILES/zexport
-source $ZFILES/zalias
-
 ## plugin
-#source $ZFILES/zplug
-#source $ZFILES/zplug_lazy
 source $ZFILES/zinit
 
 if [[ $(uname -a | grep microsoft) ]]; then
-    export DISPLAY=localhost:0.0
-    export PATH="$PATH:/mnt/c/Program Files/win32yank-x64"
+  # wsl
+  source $ZFILES/wsl.zsh
+elif [[ $(uname -a | grep Darwin) ]]; then
+  # mac
+  source $ZFILES/mac.zsh
 fi
 
 #if type zprof > /dev/null 2>&1; then
 #  zprof | less
 #fi
 
+# tmux
 [[ -z "$TMUX" && -n "$USE_TMUX" ]] && {
     [[ -n "$ATTACH_ONLY" ]] && {
         tmux a 2>/dev/null || {
@@ -92,20 +89,3 @@ fi
     tmux new-window -c "$PWD" 2>/dev/null && exec tmux a
     exec tmux
 }
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# completion
-eval "$(aws-vault --completion-script-zsh)"
-source <(kubectl completion zsh)
-source "$(ls -d ${HOME}/.asdf/installs/awscli/* | sort | head -n1)/bin/aws_zsh_completer.sh"
-
-export PATH="$HOME/.poetry/bin:$PATH"
-export AWS_VAULT_BACKEND=pass
-export AWS_VAULT_PASS_PREFIX=aws-vault
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /home/kefi/.asdf/shims/terraform terraform

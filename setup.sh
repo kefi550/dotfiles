@@ -2,17 +2,40 @@
 
 DOTFILE_DIR=$(pwd)
 
-ln -snfv $DOTFILE_DIR/_config/zsh/p10k.zsh ~/.p10k.zsh
-ln -snfv $DOTFILE_DIR/_zshrc ~/.zshrc
+if [ "$(uname)" == 'Darwin' ]; then
+  #mac
+  if !(type gln > /dev/null 2&>1); then
+    brew install coreutils
+  fi
+  LN=gln
+  :
+else
+  #linux
+  LN=ln
+  :
+fi
 
-ln -snfv $DOTFILE_DIR/_config/vim ~/.config/
-ln -snfv $DOTFILE_DIR/_config/zsh ~/.config/
-ln -snfv $DOTFILE_DIR/_config/base16-shell ~/.config/
-ln -snfv $DOTFILE_DIR/_tmux.conf ~/.tmux.conf
-ln -snfv $DOTFILE_DIR/_gitconfig ~/.gitconfig
-ln -snfv $DOTFILE_DIR/_textlintrc ~/.textlintrc
-ln -snfv $DOTFILE_DIR/_vimrc ~/.vimrc
-ln -snfv $DOTFILE_DIR/_tool-versions ~/.tool-versions
+$LN -snfv $DOTFILE_DIR/_config/zsh/p10k.zsh ~/.p10k.zsh
+$LN -snfv $DOTFILE_DIR/_zshrc ~/.zshrc
+
+if [ ! -e $HOME/.config ]; then
+  mkdir $HOME/.config
+fi
+
+$LN -snfv $DOTFILE_DIR/_config/vim ~/.config/
+$LN -snfv $DOTFILE_DIR/_config/zsh ~/.config/
+$LN -snfv $DOTFILE_DIR/_config/base16-shell ~/.config/
+$LN -snfv $DOTFILE_DIR/_tmux.conf ~/.tmux.conf
+$LN -snfv $DOTFILE_DIR/_gitconfig ~/.gitconfig
+$LN -snfv $DOTFILE_DIR/_textlintrc ~/.textlintrc
+$LN -snfv $DOTFILE_DIR/_vimrc ~/.vimrc
+$LN -snfv $DOTFILE_DIR/_tool-versions ~/.tool-versions
+
+if [ ! -e $HOME/.vim/colors ]; then
+  mkdir -p $HOME/.vim/colors
+fi
+
+$LN -snfv $DOTFILE_DIR/submodules/vim-colors-solarized/colors/solarized.vim ~/.vim/colors/
 
 #brew install fzf
 # install pynvim

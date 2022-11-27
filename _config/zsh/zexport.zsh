@@ -76,8 +76,9 @@ fi
 
 # awscli
 ## completion
-if [ -d $HOME/.asdf/installs/awscli ]; then
-  source "$(ls -d ${HOME}/.asdf/installs/awscli/* | sort | head -n1)/bin/aws_zsh_completer.sh"
+LATEST_AWSCLI_PATH=$(ls -d ${HOME}/.asdf/installs/awscli/* | sort | head -n1)
+if [ -f "${LATEST_AWSCLI_PATH}/bin/aws_zsh_completer.sh" ]; then
+  source "${LATEST_AWSCLI_PATH}/bin/aws_zsh_completer.sh"
 fi
 
 # fzf

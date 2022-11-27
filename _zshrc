@@ -6,8 +6,8 @@
 # fi
 
 export ZFILES=$HOME/.config/zsh
-source $ZFILES/zexport
-source $ZFILES/zalias
+source $ZFILES/zexport.zsh
+source $ZFILES/zalias.zsh
 
 # prompt
 #source $ZFILES/zprompt
@@ -63,7 +63,7 @@ setopt nolistbeep
 setopt no_beep
 
 ## plugin
-source $ZFILES/zinit
+source $ZFILES/zinit.zsh
 
 if [[ $(uname -a | grep microsoft) ]]; then
   # wsl

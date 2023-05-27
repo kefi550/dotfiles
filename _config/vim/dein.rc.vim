@@ -17,13 +17,25 @@ endif
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  " let g:dein_rc_dir    = expand("~/.config/vim")
   let s:toml      = g:config_dir . '/dein.toml'
   let s:lazy_toml = g:config_dir . '/dein_lazy.toml'
-
-  " TOML を読み込み、キャッシュしておく
   call dein#load_toml(s:toml, {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
+  if has('nvim')
+    " nvim用dein
+    let s:nvim_toml      = g:config_dir . '/dein_nvim.toml'
+    " let s:nvim_lazy_toml = g:config_dir . '/dein_lazy_nvim.toml'
+    call dein#load_toml(s:nvim_toml, {'lazy': 0})
+    " call dein#load_toml(s:vim_lazy_toml, {'lazy': 1})
+  else
+    " vim用dein
+    let s:vim_toml      = g:config_dir . '/dein_vim.toml'
+    let s:vim_lazy_toml = g:config_dir . '/dein_lazy_vim.toml'
+    " TOML を読み込み、キャッシュしておく
+    call dein#load_toml(s:vim_toml, {'lazy': 0})
+    call dein#load_toml(s:vim_lazy_toml, {'lazy': 1})
+  endif
+
 
   call dein#end()
   call dein#save_state()

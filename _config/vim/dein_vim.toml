@@ -1,0 +1,228 @@
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+
+# カッコ補完
+[[plugins]]
+repo = 'Townk/vim-autoclose'
+
+[[plugins]]
+repo = 'junegunn/vim-emoji'
+hook_post_source = '''
+  set completefunc=emoji#complete
+'''
+
+[[plugins]]
+repo = 'reireias/vim-cheatsheet'
+hook_add = '''
+  let g:cheatsheet#cheat_file = '~/.config/vim/ovim/cheetsheet.md'
+'''
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'kana/vim-operator-user'
+
+# yamlインデント
+[[plugins]]
+repo = 'chase/vim-ansible-yaml'
+hook_add='''
+  let g:ansible_options = {'ignore_blank_lines': 0}
+'''
+
+[[plugins]]
+repo = 'hashivim/vim-terraform'
+
+# syntax check
+[[plugins]]
+repo =  'scrooloose/syntastic'
+
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
+
+[[plugins]]
+repo = 'mattn/vim-goimports'
+hook_add=''' 
+  let g:goimports = 1
+  let g:goimports_simplify = 1
+'''
+
+[[plugins]]
+repo = 'mattn/vim-gorun'
+
+[[plugins]]
+repo = 'mattn/vim-goimpl'
+
+# ヤンクしたとこが一瞬ハイライト
+[[plugins]]
+repo = 'haya14busa/vim-operator-flashy'
+hook_source = '''
+  map y <Plug>(operator-flashy)
+  nmap Y <Plug>(operator-flashy)$
+'''
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+ 
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'Shougo/echodoc.vim'
+hook_add= '''
+  let g:echodoc#enable_at_startup=1
+  let g:echodoc#type = 'signature'
+'''
+
+[[plugins]]
+repo = 'dart-lang/dart-vim-plugin'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-buffer.vim'
+# on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'sh', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+depends = ['asyncomplete.vim']
+hook_add = '''
+  call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'priority': 5,
+    \ 'whitelist': ['*'],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
+  \ }))
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-file.vim'
+depends = ['asyncomplete.vim']
+hook_add = '''
+  call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    \ 'name': 'file',
+    \ 'whitelist': ['*'],
+    \ 'priority': 10,
+    \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
+'''
+
+# [[plugins]]
+# repo = 'Shougo/neosnippet-snippets'     
+# 
+# [[plugins]]
+# repo = 'Shougo/neosnippet.vim'
+# depends = 'neosnippet-snippets'
+# hook_add = '''
+#   " <TAB>: completion.
+#   " inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
+# 
+#   " Plugin key-mappings.
+#   imap <C-k> <Plug>(neosnippet_expand_or_jump)
+#   nmap <C-k> <Plug>(neosnippet_expand_or_jump)
+#   smap <C-k> <Plug>(neosnippet_expand_or_jump)
+#   xmap <C-k> <Plug>(neosnippet_expand_target)
+#   imap <C-s> <Plug>(neosnippet_expand_or_jump)
+#   nmap <C-s> <Plug>(neosnippet_expand_or_jump)
+#   smap <C-s> <Plug>(neosnippet_expand_or_jump)
+#   xmap <C-s> <Plug>(neosnippet_expand_target)
+# 
+#   " SuperTab like snippets behavior.
+#   " imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
+#   " smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
+# 
+#   let g:neosnippet#data_directory = expand('~/_vim/.neosnippet')
+# 
+#   " Tell Neosnippet about the other snippets
+#   " gosnippets は vim-go がうまいことやってくれるはずだけど、なんかうまくいかないので直接追加。
+#   let g:neosnippet#snippets_directory = [
+#       \   '~/vimfiles/snippets',
+#       \   '~/_vim/dein/repos/github.com/honza/vim-snippets/snippets/',
+#       \   '~/_vim/dein/repos/github.com/fatih/vim-go/gosnippets/snippets/',
+#       \ ]
+#   " imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-y>" : "\<CR>"
+#   " imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand)" : pumvisible() ? "\<C-y>" : "\<CR>"
+# '''
+# 
+# [[plugins]]
+# repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
+# depends = ['neosnippet.vim']
+# hook_add = '''
+#   function! Ns_completor(opt, ctx) abort
+#     let l:snips = values(neosnippet#helpers#get_completion_snippets())
+# 
+#     let l:matches = []
+# 
+#     let l:col = a:ctx['col']
+#     let l:typed = a:ctx['typed']
+# 
+#     let l:kw = matchstr(l:typed, '\w\+$')
+#     let l:kwlen = len(l:kw)
+# 
+#     " let l:matches = map(l:snips,'{"word":v:val["word"],"dup":1,"icase":1,"menu": "[snip] " . v:val["menu_abbr"]}')
+#     let l:matches = map(l:snips,'{"word":v:val["word"],"dup":1,"icase":1,"kind":"snip","menu": v:val["menu_abbr"]}')
+#     let l:startcol = l:col - l:kwlen
+# 
+#     call asyncomplete#complete(a:opt['name'], a:ctx, l:startcol, l:matches)
+#   endfunction
+# 
+#   function! Asyncomplete_neosnippet_register_source() abort
+#     call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+#       \ 'name': 'neosnippet',
+#       \ 'whitelist': ['*'],
+#       \ 'priority': 20,
+#       \ 'completor': function('Ns_completor'),
+#       \ }))
+#   endfunction
+# 
+#   function! Asyncomplete_neosnippet_unregister_source() abort
+#     call asyncomplete#unregister_source('neosnippet')
+#   endfunction
+# 
+#   function! Asyncomplete_toggle_neosnippet() abort
+#     if match (asyncomplete#get_source_names(), "neosnippet") != -1
+#       call Asyncomplete_neosnippet_unregister_source()
+#     else
+#       call Asyncomplete_neosnippet_register_source()
+#     endif
+#   endfunction
+# 
+#   inoremap <C-l> <C-o>:call Asyncomplete_toggle_neosnippet()<CR>
+#   cnoremap <C-l> :call Asyncomplete_toggle_neosnippet()<CR>
+#   nnoremap <C-l> :call Asyncomplete_toggle_neosnippet()<CR>
+# '''
+
+### #ディレクトリ表示
+### #[[plugins]]
+### #repo = 'Shougo/vimfiler'
+### #hook_add = '''
+### #  " Use vimfiler instead of default filer.
+### #  let g:vimfiler_as_default_explorer = 1
+### #  " Open filer
+### #  noremap <silent> :tree :VimFiler -split -simple -winwidth=30 -no-quit
+### #  nnoremap <silent> <Leader>fi :<C-u>VimFilerBufferDir -split -simple -winwidth=24 -no-quit<ENTER>
+### #  nnoremap <silent> <Leader>fi :<C-u>VimFiler -split -simple -winwidth=24 -no-quit<ENTER>
+### #  " noremap <C-X><C-T> :VimFiler -split -simple -winwidth=30 -no-quit<ENTER>
+### #  " Don't let <CR> enter the directory but let it open the directory
+### #  autocmd FileType vimfiler nmap <buffer> <CR> <Plug>(vimfiler_expand_or_edit)
+### #  " Automatically open vimfiler on start
+### #  " autocmd VimEnter * VimFiler -split -simple -winwidth=29 -no-quit
+### #'''
+
+### [[plugins]]
+### repo = 'Shougo/vimshell'
+
+### [[plugins]]
+### repo = 'fatih/molokai'

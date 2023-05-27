@@ -23,7 +23,7 @@ if [ ! -e $HOME/.config ]; then
 fi
 
 $LN -snfv $DOTFILE_DIR/_config/vim ~/.config/
-$LN -snfv $DOTFILE_DIR/_config/vim/_vimrc ~/.vimrc
+$LN -snfv $DOTFILE_DIR/_vimrc ~/.vimrc
 $LN -snfv $DOTFILE_DIR/_config/zsh ~/.config/
 $LN -snfv $DOTFILE_DIR/_tmux.conf ~/.tmux.conf
 $LN -snfv $DOTFILE_DIR/_gitconfig ~/.gitconfig

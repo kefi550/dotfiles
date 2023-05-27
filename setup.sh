@@ -36,9 +36,3 @@ fi
 
 $LN -snfv $DOTFILE_DIR/submodules/vim-colors-solarized/colors/solarized.vim ~/.vim/colors/
 $LN -snfv $DOTFILE_DIR/submodules/base16-shell ~/.config/
-
-#brew install fzf
-# install pynvim
-#
-## vagrant
-## https://qiita.com/apatchk/items/8b1029ceaee60d3e18a2

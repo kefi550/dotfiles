@@ -23,7 +23,7 @@ mkdir -p $HOME/.config
 $LN -snfv $DOTFILE_DIR/_config/vim ~/.config/
 $LN -snfv $DOTFILE_DIR/_vimrc ~/.vimrc
 mkdir -p $HOME/.config/nvim
-$LN -snfv $DOTFILE_DIR/_config/vim/init.vim ~/.config/nvim/
+$LN -snfv $DOTFILE_DIR/_vimrc ~/.config/nvim/init.vim
 $LN -snfv $DOTFILE_DIR/_config/zsh ~/.config/
 $LN -snfv $DOTFILE_DIR/_tmux.conf ~/.tmux.conf
 $LN -snfv $DOTFILE_DIR/_gitconfig ~/.gitconfig

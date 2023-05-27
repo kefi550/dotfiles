@@ -14,7 +14,15 @@ repo = 'cespare/vim-toml'
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 hook_post_update = '''
-  let g:quickrun_config = {'*': {'hook/time/enable': '1'},}
+  let g:quickrun_config = {
+  \     '*': {'hook/time/enable': '1'},
+  \    'json': {
+  \        'outputter/buffer/filetype': 'json',
+  \        'command': 'jq',
+  \        'cmdopt': '.',
+  \        'exec': 'cat %s | sed -z "s/\n//g" | %c %o',
+  \    }
+  \}
 '''
 
 [[plugins]]
@@ -115,6 +123,9 @@ hook_add= '''
   let g:echodoc#type = 'signature'
 '''
 
+[[plugins]]
+repo = 'dart-lang/dart-vim-plugin'
+
 ### LSP
 [[plugins]]
 repo = 'prabirshrestha/async.vim'
@@ -122,6 +133,9 @@ repo = 'prabirshrestha/async.vim'
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
 hook_add = '''
+  let g:lsp_diagnostics_signs_warning = {'text': '💩'}
+  let g:lsp_diagnostics_signs_error = {'text': '💩'}
+
   let g:lsp_diagnostics_enabled = 1
   let g:lsp_diagnostics_echo_cursor = 1
   

@@ -1,3 +1,37 @@
+" filetypeまわり
+""""""""""
+filetype indent on
+if has("autocmd")
+  "ファイルタイプの検索を有効にする
+  filetype plugin on
+  "ファイルタイプに合わせたインデントを利用
+  filetype indent on
+  "sw=softtabstop, sts=shiftwidth, ts=tabstop, et=expandtabの略
+  autocmd FileType c           setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType go          setlocal sw=4 sts=4 ts=4 noet
+  autocmd FileType html        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType ruby        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType js          setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType zsh         setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType python      setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType scala       setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType json        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType yml         setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType yaml        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType html        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType css         setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType scss        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType sass        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType javascript  setlocal sw=4 sts=4 ts=4 et
+endif
+
+augroup filetypedetect
+  autocmd BufRead,BufNewFile *.dircolors set filetype=dircolors
+augroup END
+""""""""""
+
+" optionもろもろ
+""""""""""
 set noswapfile
 set encoding=UTF-8
 set termencoding=utf-8
@@ -59,3 +93,59 @@ let g:solarized_termcolors=256
 set background=dark
 colorscheme solarized
 " colorscheme molokai
+""""""""""
+
+" clipboard
+""""""""""
+" WSL
+if system('uname -a | grep microsoft') != ''
+   augroup myYank
+     autocmd!
+     autocmd TextYankPost * :call system('clip.exe', @")
+   augroup END
+endif")
+" Mac
+if system('uname -a | grep Darwin') != ''
+   augroup myYank
+     autocmd!
+     autocmd TextYankPost * :call system('pbcopy', @")
+   augroup END
+endif")
+" WSL以外
+if system('uname -a | grep Linux | grep -v microsoft') != ''
+   augroup myYank
+     autocmd!
+     autocmd TextYankPost * :call system('xclip -selection c', @")
+   augroup END
+endif")
+""""""""""
+
+" python
+""""""""""
+function! s:findRoot(target)
+  let dir = getcwd()
+  while 1
+    let files = split(globpath(l:dir, '*'), '\n')
+    for f in l:files
+        if a:target == fnamemodify(f, ':t')
+            return l:dir
+        endif
+    endfor
+    if l:dir == "/"
+      break
+    endif
+    let dir = fnamemodify(l:dir, ':h')
+  endwhile
+  return ""
+endfunction
+
+function! s:setVenv()
+  let dir = s:findRoot('Pipfile')
+  echo l:dir
+  if dir != ""
+    let $VIRTUAL_ENV = trim(system("cd " . l:dir . "; pipenv --venv"))
+  endif
+endfunction
+
+autocmd FileType python call s:setVenv()
+""""""""""

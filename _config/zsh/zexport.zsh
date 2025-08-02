@@ -63,14 +63,14 @@ if which yarn &> /dev/null ; then
 fi
 
 # aws-vault
-if [[ $(type aws-vault > /dev/null) ]]; then
+if type aws-vault > /dev/null 2>&1; then
   eval "$(aws-vault --completion-script-zsh)"
   export AWS_VAULT_BACKEND=pass
   export AWS_VAULT_PASS_PREFIX=aws-vault
 fi
 
 # kubectl
-if [[ $(type kubectl > /dev/null) ]]; then
+if type kubectl > /dev/null 2>&1; then
   source <(kubectl completion zsh)
 fi
 
@@ -89,11 +89,10 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # terraform
-if [[ -f $HOME/.asdf/shims/terraform ]]; then
+if type terraform > /dev/null 2>&1; then
   autoload -U +X bashcompinit && bashcompinit
   complete -o nospace -C $HOME/.asdf/shims/terraform terraform
 fi
 
 # docker
 export DOCKER_BUILDKIT=1
-

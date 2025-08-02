@@ -27,7 +27,7 @@ zinit load mafredri/zsh-async
 zinit load romkatv/powerlevel10k
 
 zinit ice wait'!0'; zinit light chrissicool/zsh-256color
-zinit ice wait'!0'; zinit light b4b4r07/enhancd
+# zinit ice wait'!0'; zinit light b4b4r07/enhancd
 
 #### タイプ補完
 zinit ice wait'!0'; zinit light zsh-users/zsh-autosuggestions

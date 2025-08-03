@@ -82,7 +82,7 @@ if [ -f "${LATEST_AWSCLI_PATH}/bin/aws_zsh_completer.sh" ]; then
 fi
 
 # fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # p10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

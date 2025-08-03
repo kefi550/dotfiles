@@ -91,5 +91,3 @@ fi
 }
 
 [[ -e $ZFILES/office.zsh ]] && source $ZFILES/office.zsh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

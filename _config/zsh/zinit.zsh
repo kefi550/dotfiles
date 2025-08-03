@@ -34,10 +34,10 @@ zinit ice wait'!0'; zinit light zsh-users/zsh-autosuggestions
 zinit ice wait'!0'; zinit light zsh-users/zsh-completions
 
 ## history関係
-zinit ice wait'!0'; zinit light zsh-users/zsh-history-substring-search
+# zinit ice wait'!0'; zinit light zsh-users/zsh-history-substring-search
+zinit ice lucid wait'0'; zinit light joshskidmore/zsh-fzf-history-search
 
 # 構文のハイライト(https://github.com/zsh-users/zsh-syntax-highlighting)
-#zinit ice wait'!0'; zinit load zsh-users/zsh-syntax-highlighting
 zinit ice wait'!0'; zinit light  zdharma/fast-syntax-highlighting
 
 ### emoji

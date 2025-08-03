@@ -9,13 +9,6 @@ repo = 'Shougo/unite.vim'
 repo = 'cespare/vim-toml'
 
 [[plugins]]
-repo = 'scrooloose/nerdtree'
-
-# カッコ補完
-[[plugins]]
-repo = 'Townk/vim-autoclose'
-
-[[plugins]]
 repo = 'junegunn/vim-emoji'
 hook_post_source = '''
   set completefunc=emoji#complete
@@ -27,9 +20,6 @@ hook_add = '''
   " FIXME
   let g:cheatsheet#cheat_file = '~/.config/vim/ovim/cheetsheet.md'
 '''
-
-[[plugins]]
-repo = 'tpope/vim-surround'
 
 [[plugins]]
 repo = 'kana/vim-operator-user'
@@ -73,17 +63,7 @@ hook_source = '''
 '''
 
 [[plugins]]
-repo = 'junegunn/fzf'
-build = './install --all'
- 
-[[plugins]]
-repo = 'junegunn/fzf.vim'
-
-[[plugins]]
 repo = 'airblade/vim-gitgutter'
-
-[[plugins]]
-repo = 'ryanoasis/vim-devicons'
 
 [[plugins]]
 repo = 'Shougo/echodoc.vim'
@@ -95,30 +75,6 @@ hook_add= '''
 [[plugins]]
 repo = 'dart-lang/dart-vim-plugin'
 
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-buffer.vim'
-# on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'sh', 'snippet', 'toml', 'vim', 'vb', 'xsl']
-depends = ['asyncomplete.vim']
-hook_add = '''
-  call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-    \ 'name': 'buffer',
-    \ 'priority': 5,
-    \ 'whitelist': ['*'],
-    \ 'completor': function('asyncomplete#sources#buffer#completor'),
-  \ }))
-'''
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-file.vim'
-depends = ['asyncomplete.vim']
-hook_add = '''
-  call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-    \ 'name': 'file',
-    \ 'whitelist': ['*'],
-    \ 'priority': 10,
-    \ 'completor': function('asyncomplete#sources#file#completor')
-    \ }))
-'''
 
 # [[plugins]]
 # repo = 'Shougo/neosnippet-snippets'     
@@ -227,86 +183,3 @@ hook_add = '''
 
 ### [[plugins]]
 ### repo = 'fatih/molokai'
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-hook_add = '''
-  let g:lsp_diagnostics_signs_warning = {'text': '💩'}
-  let g:lsp_diagnostics_signs_error = {'text': '💩'}
-
-  let g:lsp_diagnostics_enabled = 1
-  let g:lsp_diagnostics_echo_cursor = 1
-  
-  " debug
-  " let g:lsp_log_verbose = 1
-  " let g:lsp_log_file = expand('~/vim-lsp.log')
-  let g:lsp_async_completion = 1
-  
-  " let g:lsp_preview_max_height = 1
-  " let g:lsp_preview_max_width = 1
-  let g:lsp_signature_help_enabled = 1
-  
-  let g:lsp_text_edit_enabled = 1
-
-  let g:lsp_preview_autoclose = 1
-  let g:lsp_preview_keep_focus = 0
-  let g:lsp_preview_doubletap = 0
-  let g:lsp_highlight_references_enabled = 1
-  let g:lsp_highlights_enabled = 1
-  let g:lsp_diagnostics_enabled = 1
-  let g:lsp_async_completion = 1
-  let g:lsp_auto_enable = 1
-  let g:lsp_insert_text_enabled = 0
-  let g:lsp_text_edit_enabled = 0
-  let g:lsp_diagnostics_echo_cursor = 1
-  let g:lsp_virtual_text_enabled = 0
-  let g:lsp_textprop_enabled = 0
-  let g:lsp_fold_enabled = 1
-
-  function SetLSPShortcuts()
-    nnoremap <leader>ld :<C-u>LspDefinition<CR>
-    " nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
-    " nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
-    " nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
-    " nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
-    " nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
-    " nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
-    " nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
-    " nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
-    " nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
-  endfunction()
-  
-  augroup LSP
-    autocmd!
-    autocmd FileType python call SetLSPShortcuts()
-  augroup END
-'''
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
-#on_event=['InsertEnter']
-on_ft = ['sh', 'autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'terraform', 'tf', 'toml', 'vim', 'vb', 'xsl', 'html']
-hook_add = '''
-  " let g:asyncomplete_log_file = expand('~/asyncomplete.log')
-  let g:asyncomplete_auto_popup = 1
-  let g:asyncomplete_popup_delay = 0
-  let g:asyncomplete_auto_completeopt = 1
-  let g:asyncomplete_remove_duplicates = 1
-  let g:asyncomplete_smart_completion = 1
-  " set completeopt-=preview
-  set completeopt=menuone
-  " let g:asyncomplete_enable_for_all = 0
-  " autocmd vimrc FileType autohotkey,autoit,cfg,git,go,groovy,java,javascript,python,snippet,toml,vim,vb,xsl call asyncomplete#enable_for_buffer()"
-'''
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
-on_ft = ['python', 'go', 'sh', 'html', 'terraform', 'tf']
-depends = ['asyncomplete.vim', 'vim-lsp']
-
-[[plugins]]
-repo = 'prabirshrestha/async.vim'
-
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'

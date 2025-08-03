@@ -1,3 +1,4 @@
+let mapleader = "\<Space>"
 
 " insertモードから抜ける
 inoremap <silent> jj <ESC>
@@ -24,3 +25,26 @@ inoremap <silent> kk <ESC>
 "  vnoremap <silent>p :r !win32yank -o<CR>
 "endif
 """"""""""""""""
+
+" LSP
+
+" let g:leader_pressed = 0
+" 
+" function! CheckLeaderKeyPressed()
+"   let g:leader_pressed = 1
+"   redraw!
+"   echo "getwild"
+" endfunction
+" 
+" noremap <silent> <Space> :call CheckLeaderKeyPressed()<CR>
+" 
+" function! ClearLeaderKeyPressed()
+"   let g:leader_pressed = 0
+"   redraw!
+"   echo "andtough"
+" endfunction
+" 
+" augroup leaderKeyPressed
+"   autocmd!
+"   autocmd CmdlineLeave : call ClearLeaderKeyPressed()
+" augroup END
